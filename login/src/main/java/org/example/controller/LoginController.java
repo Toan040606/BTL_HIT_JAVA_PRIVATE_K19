@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,7 +21,13 @@ public class LoginController {
     @FXML private PasswordField txtPass;
     @FXML private Label lblMsg;
 
-    @FXML public void handleLogin(){
+    @FXML
+    public void initialize() {
+
+    }
+
+    @FXML
+    public void handleLogin(){
         String username = txtUser.getText();
         String password = txtPass.getText();
 
@@ -43,14 +50,14 @@ public class LoginController {
     @FXML
     public void goRegister() throws IOException {
         Stage stage = (Stage) txtUser.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/register.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/register.fxml"));
         stage.setScene(new Scene(root));
     }
 
     @FXML
     public void goForgotPassword() throws IOException {
         Stage stage = (Stage) txtUser.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/password.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/FindEmail.fxml"));
         stage.setScene(new Scene(root));
     }
 }

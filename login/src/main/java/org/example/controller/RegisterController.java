@@ -16,25 +16,26 @@ import org.example.model.User;
 import java.io.IOException;
 
 public class RegisterController {
-    @FXML private TextField txtHoTen,txtUsername,txtEmail;
+    @FXML private TextField txtHo, txtTen, txtUsername,txtEmail;
     @FXML private PasswordField txtPass;
     @FXML private PasswordField txtConfirm;
     @FXML private Label lblMsg;
 
     @FXML public void handleRegister(){
-        String hoTen = txtHoTen.getText();
+        String ho = txtHo.getText();
+        String ten = txtTen.getText();
         String username = txtUsername.getText();
         String email = txtEmail.getText();
         String pass = txtPass.getText();
         String confirm = txtConfirm.getText();
 
-        if(hoTen.isEmpty() || username.isEmpty() || email.isEmpty() || pass.isEmpty() || confirm.isEmpty()){
+        if(ho.isEmpty() || ten.isEmpty() || username.isEmpty() || email.isEmpty() || pass.isEmpty() || confirm.isEmpty()){
             lblMsg.setText(ErrorMessage.EMPTY_ERROR);
             lblMsg.setStyle("-fx-text-fill: red;");// đỏ
             return;
         }
 
-        User user = new User(hoTen,username,email,pass);
+        User user = new User(ho, ten, username,email,pass);
 
         if(UserDao.exists(user)){
             lblMsg.setText(ErrorMessage.EXISTS_ERROR);
@@ -60,7 +61,7 @@ public class RegisterController {
     @FXML
     public void goLogin() throws IOException {
         Stage stage = (Stage) txtUsername.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         stage.setScene(new Scene(root));
     }
 }

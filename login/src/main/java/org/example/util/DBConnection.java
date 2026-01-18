@@ -8,9 +8,9 @@ import java.sql.DriverManager;
 
 public class DBConnection {
     // Thông tin kết nối
-    private static final String url = "jdbc:mysql://localhost:3306/login_javafx?useSSL=false&serverTimezone=UTC";
+    private static final String url = "jdbc:mysql://localhost:3306/user_db";
     private static final String user = "root";
-    private static final String password = "123456";
+    private static final String password = "1234";
 
     // Kết nối
     public static Connection getConnection(){
