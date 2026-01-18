@@ -11,56 +11,44 @@ import javafx.stage.Stage;
 import org.example.constant.ErrorMessage;
 import org.example.constant.SuccessMessage;
 import org.example.dao.UserDao;
-import org.example.model.User;
 
 import java.io.IOException;
 
-public class RegisterController {
-    @FXML private TextField txtHo, txtTen, txtUsername,txtEmail;
-    @FXML private PasswordField txtPass;
+public class ResetPasswordController {
+    @FXML private PasswordField txtNewPass;
     @FXML private PasswordField txtConfirm;
     @FXML private Label lblMsg;
 
-    @FXML public void handleRegister(){
-        String ho = txtHo.getText();
-        String ten = txtTen.getText();
-        String username = txtUsername.getText();
-        String email = txtEmail.getText();
-        String pass = txtPass.getText();
+    @FXML public void handleResetPassword(){
+        String email = FindEmailController.resetEmail ;
+        String newPass = txtNewPass.getText();
         String confirm = txtConfirm.getText();
 
-        if(ho.isEmpty() || ten.isEmpty() || username.isEmpty() || email.isEmpty() || pass.isEmpty() || confirm.isEmpty()){
+        if(newPass.isEmpty() || confirm.isEmpty()){
             lblMsg.setText(ErrorMessage.EMPTY_ERROR);
             lblMsg.setStyle("-fx-text-fill: red;");// đỏ
             return;
         }
 
-        User user = new User(ho, ten, username,email,pass);
-
-        if(UserDao.exists(user)){
-            lblMsg.setText(ErrorMessage.EXISTS_ERROR);
-            lblMsg.setStyle("-fx-text-fill: red;");// đỏ
-            return;
-        }
-
-        if(!pass.equals(confirm)){
+        if(!newPass.equals(confirm)){
             lblMsg.setText(ErrorMessage.PASS_ERROR);
             lblMsg.setStyle("-fx-text-fill: red;");// đỏ
             return;
         }
 
-        if(UserDao.register(user)){
-            lblMsg.setText(SuccessMessage.REGISTER_SUCCESS);
+        if(UserDao.resetPass(email,newPass)){
+            lblMsg.setText(SuccessMessage.RESET_PASS_SUCCESS);
             lblMsg.setStyle("-fx-text-fill: #00ff99;");// xanh
         }
         else{
-            lblMsg.setText(ErrorMessage.REGISTER_ERROR);
+            lblMsg.setText(ErrorMessage.RESET_PASS_ERROR);
             lblMsg.setStyle("-fx-text-fill: red;");// đỏ
         }
     }
+
     @FXML
     public void goLogin() throws IOException {
-        Stage stage = (Stage) txtUsername.getScene().getWindow();
+        Stage stage = (Stage) txtNewPass.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         stage.setScene(new Scene(root));
     }
