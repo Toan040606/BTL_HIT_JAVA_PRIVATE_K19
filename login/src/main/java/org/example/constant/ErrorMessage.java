@@ -8,4 +8,5 @@ public class ErrorMessage {
     public static final String PASS_ERROR  = "Mật khẩu không trùng khớp!";
     public static final String REGISTER_ERROR  = "Đăng ký không thành công!";
     public static final String RESET_PASS_ERROR  = "Đổi mật khẩu không thành công!";
+    public static final String INVALID_EMAIL_ERROR = "Email không tồn tại trong hệ thống!";
 }

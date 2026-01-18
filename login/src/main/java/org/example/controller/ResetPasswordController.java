@@ -14,18 +14,17 @@ import org.example.dao.UserDao;
 
 import java.io.IOException;
 
-public class ChangePasswordController {
-    @FXML private TextField txtEmail;
+public class ResetPasswordController {
     @FXML private PasswordField txtNewPass;
     @FXML private PasswordField txtConfirm;
     @FXML private Label lblMsg;
 
     @FXML public void handleResetPassword(){
-        String email = txtEmail.getText();
+        String email = FindEmailController.resetEmail ;
         String newPass = txtNewPass.getText();
         String confirm = txtConfirm.getText();
 
-        if(email.isEmpty() || newPass.isEmpty() || confirm.isEmpty()){
+        if(newPass.isEmpty() || confirm.isEmpty()){
             lblMsg.setText(ErrorMessage.EMPTY_ERROR);
             lblMsg.setStyle("-fx-text-fill: red;");// đỏ
             return;
@@ -49,8 +48,8 @@ public class ChangePasswordController {
 
     @FXML
     public void goLogin() throws IOException {
-        Stage stage = (Stage) txtEmail.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+        Stage stage = (Stage) txtNewPass.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         stage.setScene(new Scene(root));
     }
 }

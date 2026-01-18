@@ -6,6 +6,7 @@ import org.example.util.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class UserDao {
     // Đăng ký
@@ -16,10 +17,11 @@ public class UserDao {
             assert conn != null;
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setString(1, user.getHoTen());
-            ps.setString(2, user.getUsername());
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getPassword());
+            ps.setString(1, user.getHo());
+            ps.setString(2, user.getTen());
+            ps.setString(3, user.getUsername());
+            ps.setString(4, user.getEmail());
+            ps.setString(5, user.getPassword());
             return ps.executeUpdate() > 0;
         }catch (Exception ex){
             ex.printStackTrace();
@@ -61,21 +63,30 @@ public class UserDao {
         return false;
     }
 
-    // Quên mật khẩu
-    public static boolean resetPass(String email,String newPass){
-        String sqlCheck = SqlMessage.CHECK_SQL;
+    // Tạo lại mật khẩu
+    public static boolean isEmailExists(String email) {
+        String sqlCheck = SqlMessage.CHECK_EMAIL_SQL;
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            assert conn != null;
+
+            PreparedStatement ps = conn.prepareStatement(sqlCheck);
+            ps.setString(1, email);
+            return ps.executeQuery().next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean resetPass(String email, String newPass){
         String sqlUpdate = SqlMessage.UPDATE_SQL;
 
 
         try{
             Connection conn = DBConnection.getConnection();
             assert conn != null;
-            // Check có tồn tại không
-            PreparedStatement ps1 = conn.prepareStatement(sqlCheck);
-            ps1.setString(1, email);
-            if(!ps1.executeQuery().next()){
-                return false;
-            }
 
             // Update
             PreparedStatement ps2 = conn.prepareStatement(sqlUpdate);

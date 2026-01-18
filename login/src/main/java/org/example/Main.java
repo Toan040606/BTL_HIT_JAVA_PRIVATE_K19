@@ -9,10 +9,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception{
         stage.setScene(new Scene(
-                FXMLLoader.load(getClass().getResource("/login.fxml")),
-                350, 300
+                FXMLLoader.load(getClass().getResource("/view/Login.fxml"))
         ));
-        stage.setTitle("JavaFX Login");
+        stage.setTitle("Restaurant POS System");
         stage.show();
     }
 

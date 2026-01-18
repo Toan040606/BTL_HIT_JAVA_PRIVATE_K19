@@ -2,7 +2,8 @@ package org.example.model;
 
 public class User {
     private int userID;
-    private String hoTen;
+    private String ho;
+    private String ten;
     private String username;
     private String email;
     private String password;
@@ -15,8 +16,9 @@ public class User {
         this.password = password;
     }
 
-    public User(String hoTen, String username, String email, String password) {
-        this.hoTen = hoTen;
+    public User(String ho, String ten, String username, String email, String password) {
+        this.ho = ho;
+        this.ten = ten;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -26,13 +28,20 @@ public class User {
         return userID;
     }
 
-
-    public String getHoTen() {
-        return hoTen;
+    public String getHo() {
+        return ho;
     }
 
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
+    public void setHo(String ho) {
+        this.ho = ho;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 
     public String getUsername() {
