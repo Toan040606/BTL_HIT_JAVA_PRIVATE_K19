@@ -1,6 +1,5 @@
-package org.example.controller;
+package root.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,10 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.example.constant.ErrorMessage;
-import org.example.constant.SuccessMessage;
-import org.example.dao.UserDao;
-import org.example.model.User;
+import root.service.UserAuth;
+import root.service.impl.UserAuthImpl;
 
 import java.io.IOException;
 
@@ -28,36 +25,24 @@ public class LoginController {
 
     @FXML
     public void handleLogin(){
+        UserAuth userAuth = new UserAuthImpl();
+        
         String username = txtUser.getText();
         String password = txtPass.getText();
-
-        if(username.isEmpty() || password.isEmpty()){
-            lblMsg.setText(ErrorMessage.EMPTY_ERROR);
-            lblMsg.setStyle("-fx-text-fill: red;");// đỏ
-            return;
-        }
-        User user = new User(username,password);
-
-        if(UserDao.login(user)){
-            lblMsg.setText(SuccessMessage.LOGIN_SUCCESS);
-            lblMsg.setStyle("-fx-text-fill: #00ff99;");// xanh
-        }else{
-            lblMsg.setText(ErrorMessage.LOGIN_ERROR);
-            lblMsg.setStyle("-fx-text-fill: red;");// đỏ
-        }
+        userAuth.login(username, password, lblMsg);
     }
 
     @FXML
     public void goRegister() throws IOException {
         Stage stage = (Stage) txtUser.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/view/register.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/auth/Register.fxml"));
         stage.setScene(new Scene(root));
     }
 
     @FXML
     public void goForgotPassword() throws IOException {
         Stage stage = (Stage) txtUser.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/view/FindEmail.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/auth/FindEmail.fxml"));
         stage.setScene(new Scene(root));
     }
 }
