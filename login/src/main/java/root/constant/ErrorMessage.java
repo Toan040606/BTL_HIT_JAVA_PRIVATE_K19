@@ -1,4 +1,4 @@
-package org.example.constant;
+package root.constant;
 
 public class ErrorMessage {
     public static final String CONNECTION_ERROR  = "Connection to the database failed.";

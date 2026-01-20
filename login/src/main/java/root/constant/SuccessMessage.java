@@ -1,4 +1,4 @@
-package org.example.constant;
+package root.constant;
 
 public class SuccessMessage {
     public static final String LOGIN_SUCCESS = "Đăng nhâp thành công!";

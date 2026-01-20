@@ -1,4 +1,4 @@
-package org.example;
+package root;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +9,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception{
         stage.setScene(new Scene(
-                FXMLLoader.load(getClass().getResource("/view/Login.fxml"))
+                FXMLLoader.load(getClass().getResource("/view/auth/Login.fxml"))
         ));
         stage.setTitle("Restaurant POS System");
         stage.show();
