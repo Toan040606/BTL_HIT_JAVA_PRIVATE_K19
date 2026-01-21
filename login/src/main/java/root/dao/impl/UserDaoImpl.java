@@ -3,8 +3,11 @@ package root.dao.impl;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import root.constant.ErrorMessage;
 import root.constant.QuerryMessage;
 import root.dao.UserDao;
+import root.exception.DatabaseException;
+import root.exception.UserNotFoundException;
 import root.model.entity.User;
 import root.util.HibernateUtil;
 
@@ -18,8 +21,7 @@ public class UserDaoImpl implements UserDao {
                     .setParameter("pw", user.getPassword())
                     .uniqueResult() != null;
         }catch (Exception e){
-            e.printStackTrace();
-            return false;
+            throw new DatabaseException(ErrorMessage.DATABASE_CONNECTION_ERROR,e);
         }
     }
 
@@ -35,8 +37,7 @@ public class UserDaoImpl implements UserDao {
             return true;
         }catch (Exception e){
             if (transaction != null) transaction.rollback();
-            e.printStackTrace();
-            return false;
+            throw new DatabaseException(ErrorMessage.DATABASE_CONNECTION_ERROR,e);
         }
     }
 
@@ -51,9 +52,8 @@ public class UserDaoImpl implements UserDao {
 
             return count != null && count > 0;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new DatabaseException(ErrorMessage.DATABASE_CONNECTION_ERROR,e);
         }
-        return false;
     }
 
     // Tạo lại mật khẩu
@@ -66,8 +66,7 @@ public class UserDaoImpl implements UserDao {
 
             return count != null && count > 0;
         } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            throw new DatabaseException(ErrorMessage.DATABASE_CONNECTION_ERROR,e);
         }
     }
 
@@ -84,14 +83,17 @@ public class UserDaoImpl implements UserDao {
 
             transaction.commit();
 
-            return rowsAffected > 0;
+            if(rowsAffected == 0){
+                throw new UserNotFoundException(ErrorMessage.USER_NOT_FOUND_ERROR);
+            }
+            return true;
+        }catch (UserNotFoundException e){
+            throw e;
         }catch (Exception ex){
             if (transaction != null) {
                 transaction.rollback();
             }
-            ex.printStackTrace();
-            return false;
+            throw new DatabaseException(ErrorMessage.DATABASE_CONNECTION_ERROR,ex);
         }
-
     }
 }
