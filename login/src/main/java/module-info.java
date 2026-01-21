@@ -9,6 +9,7 @@ module root.login {
     requires org.hibernate.orm.core;
     requires annotations;
     requires java.naming;
+    requires jbcrypt;
 
     exports root;
     exports root.controller;

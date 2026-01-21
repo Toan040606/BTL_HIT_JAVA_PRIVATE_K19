@@ -10,16 +10,21 @@ import root.exception.DatabaseException;
 import root.exception.UserNotFoundException;
 import root.model.entity.User;
 import root.util.HibernateUtil;
+import root.util.PasswordUtil;
 
 public class UserDaoImpl implements UserDao {
     // Đăng nhập
     public boolean login(User user){
         try (Session session = HibernateUtil.buildingSessionFactory().openSession()) {
-            return session
-                    .createQuery(QuerryMessage.USER_LOGIN, User.class)
+            User dbUser = session.createQuery(QuerryMessage.USER_LOGIN, User.class)
                     .setParameter("un", user.getUsername())
-                    .setParameter("pw", user.getPassword())
-                    .uniqueResult() != null;
+                    .uniqueResult();
+
+            if(dbUser == null){
+                return false;
+            }
+            // So sách mật khẩu mã khóa
+            return PasswordUtil.checkPassword(user.getPassword(),dbUser.getPassword());
         }catch (Exception e){
             throw new DatabaseException(ErrorMessage.DATABASE_CONNECTION_ERROR,e);
         }

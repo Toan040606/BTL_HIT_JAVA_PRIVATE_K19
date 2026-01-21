@@ -9,6 +9,7 @@ import root.exception.AuthException;
 import root.exception.DatabaseException;
 import root.model.entity.User;
 import root.service.UserAuth;
+import root.util.PasswordUtil;
 
 public class UserAuthImpl implements UserAuth {
     public UserDao userDao = new UserDaoImpl();
@@ -44,32 +45,26 @@ public class UserAuthImpl implements UserAuth {
     public void register(String firstName, String lastName, String username, String email, String pass, String confirm, Label lblMsg) {
        try{
            if(firstName.isEmpty() || lastName.isEmpty() || username.isEmpty() || email.isEmpty() || pass.isEmpty() || confirm.isEmpty()){
-//            lblMsg.setText(ErrorMessage.EMPTY_ERROR);
-//            lblMsg.setStyle("-fx-text-fill: red;");// đỏ
-//            return;
                throw new AuthException(ErrorMessage.EMPTY_ERROR);
            }
+
+           if(!pass.equals(confirm)){
+               throw new AuthException(ErrorMessage.PASS_ERROR);
+           }
+
+           // MÃ Hóa
+           String hashedPassword = PasswordUtil.hashPassword(pass);
 
            User user = User.builder()
                    .firstName(firstName)
                    .lastName(lastName)
                    .username(username)
                    .email(email)
-                   .password(pass)
+                   .password(hashedPassword)
                    .build();
 
            if(userDao.exists(user)){
-//               lblMsg.setText(ErrorMessage.EXISTS_ERROR);
-//               lblMsg.setStyle("-fx-text-fill: red;");// đỏ
-//               return;
                throw new AuthException(ErrorMessage.EXISTS_ERROR);
-           }
-
-           if(!pass.equals(confirm)){
-//               lblMsg.setText(ErrorMessage.PASS_ERROR);
-//               lblMsg.setStyle("-fx-text-fill: red;");// đỏ
-//               return;
-               throw new AuthException(ErrorMessage.PASS_ERROR);
            }
 
            if(userDao.register(user)){
@@ -77,8 +72,6 @@ public class UserAuthImpl implements UserAuth {
                lblMsg.setStyle("-fx-text-fill: #00ff99;");// xanh
            }
            else{
-//               lblMsg.setText(ErrorMessage.REGISTER_ERROR);
-//               lblMsg.setStyle("-fx-text-fill: red;");// đỏ
                throw new AuthException(ErrorMessage.REGISTER_ERROR);
            }
        }catch (AuthException e){
