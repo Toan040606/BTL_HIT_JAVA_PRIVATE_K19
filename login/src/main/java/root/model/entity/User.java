@@ -2,9 +2,14 @@ package root.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import root.model.entity.core.Order;
+import root.model.entity.core.TableEntity;
+import root.model.entity.menu.FoodCategory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "Users")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
