@@ -6,7 +6,7 @@ import root.constant.ErrorMessage;
 import root.constant.SuccessMessage;
 import root.dao.UserDao;
 import root.dao.impl.UserDaoImpl;
-import root.model.entity.User;
+import root.model.entity.core.User;
 import root.service.UserAuth;
 
 

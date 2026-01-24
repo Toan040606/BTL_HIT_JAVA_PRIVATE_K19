@@ -14,10 +14,14 @@ module root.login {
     exports root.controller;
     exports root.service;
     exports root.service.impl;
-    exports root.model.entity;
     exports root.dao;
     exports root.dao.impl;
+    exports root.model.entity.order.detail;
+    exports root.model.entity.core;
+    exports root.model.entity.menu;
 
     opens root.controller to javafx.fxml;
-    opens root.model.entity to org.hibernate.orm.core;
+    opens root.model.entity.order.detail to org.hibernate.orm.core;
+    opens root.model.entity.core to org.hibernate.orm.core;
+    opens root.model.entity.menu to org.hibernate.orm.core;
 }

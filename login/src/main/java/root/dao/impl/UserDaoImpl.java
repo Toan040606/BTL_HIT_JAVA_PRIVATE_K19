@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import root.constant.QuerryMessage;
 import root.dao.UserDao;
-import root.model.entity.User;
+import root.model.entity.core.User;
 import root.util.HibernateUtil;
 
 public class UserDaoImpl implements UserDao {
@@ -13,16 +13,16 @@ public class UserDaoImpl implements UserDao {
     // Đăng nhập
     public boolean login(User user){
         try {
-            return session
+            User a = session
                     .createQuery(QuerryMessage.USER_LOGIN, User.class)
                     .setParameter("un", user.getUsername())
                     .setParameter("pw", user.getPassword())
-                    .uniqueResult() != null;
+                    .uniqueResult();
+
+            return a != null;
         } catch (Exception e){
             e.printStackTrace();
             return false;
-        } finally {
-            session.close();
         }
     }
 

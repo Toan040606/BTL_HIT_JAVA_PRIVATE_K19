@@ -1,4 +1,4 @@
-package root.model.entity;
+package root.model.entity.core;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,4 +33,13 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<FoodCategory> foodCategories = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<TableEntity> tables = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
 }

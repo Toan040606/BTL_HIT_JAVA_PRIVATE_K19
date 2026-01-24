@@ -1,6 +1,6 @@
 package root.dao;
 
-import root.model.entity.User;
+import root.model.entity.core.User;
 
 public interface UserDao {
     boolean login(User user);

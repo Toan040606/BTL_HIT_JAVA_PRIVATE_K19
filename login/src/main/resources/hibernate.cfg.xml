@@ -7,6 +7,17 @@
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
-        <mapping class="root.model.entity.User"/>
+        <mapping class="root.model.entity.core.User"/>
+        <mapping class="root.model.entity.core.Order"/>
+        <mapping class="root.model.entity.core.Customer"/>
+        <mapping class="root.model.entity.core.TableEntity"/>
+        <mapping class="root.model.entity.menu.Food"/>
+        <mapping class="root.model.entity.menu.FoodAddon"/>
+        <mapping class="root.model.entity.menu.FoodCategory"/>
+        <mapping class="root.model.entity.menu.OptionRequired"/>
+        <mapping class="root.model.entity.menu.OptionRequiredGroup"/>
+        <mapping class="root.model.entity.order.detail.OrderItem"/>
+        <mapping class="root.model.entity.order.detail.FoodAddonItem"/>
+        <mapping class="root.model.entity.order.detail.OptionRequiredItem"/>
     </session-factory>
 </hibernate-configuration>
