@@ -10,6 +10,8 @@ module root.login {
     requires annotations;
     requires java.naming;
     requires jbcrypt;
+    requires jakarta.mail;
+
 
     exports root;
     exports root.controller;

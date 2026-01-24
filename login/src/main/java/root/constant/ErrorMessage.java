@@ -13,4 +13,5 @@ public class ErrorMessage {
     public static final String DATABASE_CONNECTION_ERROR = "Không thể kết nối đến hệ thống. Vui lòng thử lại sau!";
     public static final String USER_NOT_FOUND_ERROR = "Không tìm thấy người dùng!";
     public static final String SYSTEM_ERROR = "Đã xảy ra lỗi hệ thống!";
+    public static final String VALID_OTP_ERROR = "Mã OTP không chính xác hoặc đã hết hạn!";
 }

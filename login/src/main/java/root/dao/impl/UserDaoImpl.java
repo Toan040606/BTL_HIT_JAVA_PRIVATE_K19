@@ -8,9 +8,12 @@ import root.constant.QuerryMessage;
 import root.dao.UserDao;
 import root.exception.DatabaseException;
 import root.exception.UserNotFoundException;
+import root.model.entity.OtpCode;
 import root.model.entity.User;
 import root.util.HibernateUtil;
 import root.util.PasswordUtil;
+
+import java.time.LocalDateTime;
 
 public class UserDaoImpl implements UserDao {
     // Đăng nhập
@@ -64,13 +67,14 @@ public class UserDaoImpl implements UserDao {
     // Tạo lại mật khẩu
     public boolean isEmailExists(String email) {
         try (Session session = HibernateUtil.buildingSessionFactory().openSession()){
-            Integer count = session
-                    .createQuery(QuerryMessage.USER_CHECK_EMAIL, Integer.class)
+            Long count = session
+                    .createQuery(QuerryMessage.USER_CHECK_EMAIL, Long.class)
                     .setParameter("email", email)
                     .uniqueResult();
 
             return count != null && count > 0;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new DatabaseException(ErrorMessage.DATABASE_CONNECTION_ERROR,e);
         }
     }
@@ -99,6 +103,44 @@ public class UserDaoImpl implements UserDao {
                 transaction.rollback();
             }
             throw new DatabaseException(ErrorMessage.DATABASE_CONNECTION_ERROR,ex);
+        }
+    }
+    // Luu OTP
+    public void saveOtp(OtpCode otpCode){
+        Session session = null;
+        Transaction transaction = null;
+        try{
+            session = HibernateUtil.buildingSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.createQuery(QuerryMessage.DELETE_OTP)
+                    .setParameter("email", otpCode.getEmail())
+                    .executeUpdate();
+            session.persist(otpCode);
+            transaction.commit();
+
+
+        } catch (Exception e){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new DatabaseException(ErrorMessage.DATABASE_CONNECTION_ERROR,e);
+        }finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+    // Tìm OTP hop lệ
+    @Override
+    public OtpCode findValidOtp(String email,String otp){
+        try(Session session = HibernateUtil.buildingSessionFactory().openSession()){
+            return session.createQuery(QuerryMessage.OTP_VALID, OtpCode.class)
+                    .setParameter("email",email)
+                    .setParameter("otp",otp)
+                    .setParameter("now", LocalDateTime.now())
+                    .uniqueResult();
+        } catch (Exception e){
+            throw new DatabaseException(ErrorMessage.DATABASE_CONNECTION_ERROR,e);
         }
     }
 }
