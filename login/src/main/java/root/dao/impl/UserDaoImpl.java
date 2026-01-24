@@ -18,7 +18,8 @@ import java.time.LocalDateTime;
 public class UserDaoImpl implements UserDao {
     // Đăng nhập
     public boolean login(User user){
-        try (Session session = HibernateUtil.buildingSessionFactory().openSession()) {
+        Session session = HibernateUtil.buildingSessionFactory().openSession();
+        try {
             User dbUser = session.createQuery(QuerryMessage.USER_LOGIN, User.class)
                     .setParameter("un", user.getUsername())
                     .uniqueResult();
@@ -35,8 +36,9 @@ public class UserDaoImpl implements UserDao {
 
     // Đăng ký
     public boolean register(User user){
+        Session session = HibernateUtil.buildingSessionFactory().openSession();
         Transaction transaction = null;
-        try (Session session = HibernateUtil.buildingSessionFactory().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             session.persist(user);
@@ -51,7 +53,8 @@ public class UserDaoImpl implements UserDao {
 
     // Kiểm tra tồn tại
     public boolean exists(User user){
-        try (Session session = HibernateUtil.buildingSessionFactory().openSession()) {
+        Session session = HibernateUtil.buildingSessionFactory().openSession();
+        try {
             Long count = session
                     .createQuery(QuerryMessage.USER_ISEXISTS, Long.class)
                     .setParameter("un", user.getUsername())
@@ -66,7 +69,8 @@ public class UserDaoImpl implements UserDao {
 
     // Tạo lại mật khẩu
     public boolean isEmailExists(String email) {
-        try (Session session = HibernateUtil.buildingSessionFactory().openSession()){
+        Session session = HibernateUtil.buildingSessionFactory().openSession();
+        try {
             Long count = session
                     .createQuery(QuerryMessage.USER_CHECK_EMAIL, Long.class)
                     .setParameter("email", email)
@@ -80,8 +84,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     public boolean resetPass(String email, String newPass){
+        Session session = HibernateUtil.buildingSessionFactory().openSession();
         Transaction transaction = null;
-        try (Session session = HibernateUtil.buildingSessionFactory().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             Query query = session.createQuery(QuerryMessage.USER_PASSWORD_UPDATE);
@@ -107,10 +112,9 @@ public class UserDaoImpl implements UserDao {
     }
     // Luu OTP
     public void saveOtp(OtpCode otpCode){
-        Session session = null;
+        Session session = HibernateUtil.buildingSessionFactory().openSession();
         Transaction transaction = null;
         try{
-            session = HibernateUtil.buildingSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.createQuery(QuerryMessage.DELETE_OTP)
                     .setParameter("email", otpCode.getEmail())
@@ -133,7 +137,8 @@ public class UserDaoImpl implements UserDao {
     // Tìm OTP hop lệ
     @Override
     public OtpCode findValidOtp(String email,String otp){
-        try(Session session = HibernateUtil.buildingSessionFactory().openSession()){
+        Session session = HibernateUtil.buildingSessionFactory().openSession();
+        try {
             return session.createQuery(QuerryMessage.OTP_VALID, OtpCode.class)
                     .setParameter("email",email)
                     .setParameter("otp",otp)
