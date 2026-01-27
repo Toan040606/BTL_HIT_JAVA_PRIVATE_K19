@@ -6,13 +6,13 @@ import org.hibernate.Transaction;
 import root.constant.QuerryMessage;
 import root.dao.UserDao;
 import root.model.entity.core.User;
-import root.util.HibernateUtil;
+import root.util.ConnectDB;
 
 public class UserDaoImpl implements UserDao {
-    private final Session session = HibernateUtil.buildingSessionFactory().openSession();
+    ConnectDB connectDB = new ConnectDB();
     // Đăng nhập
     public boolean login(User user){
-        try {
+        try (Session session = connectDB.open()){
             User a = session
                     .createQuery(QuerryMessage.USER_LOGIN, User.class)
                     .setParameter("un", user.getUsername())
@@ -23,13 +23,15 @@ public class UserDaoImpl implements UserDao {
         } catch (Exception e){
             e.printStackTrace();
             return false;
+        } finally {
+            connectDB.closing();
         }
     }
 
     // Đăng ký
     public boolean register(User user){
         Transaction transaction = null;
-        try {
+        try (Session session = connectDB.open()){
             transaction = session.beginTransaction();
 
             session.persist(user);
@@ -39,13 +41,15 @@ public class UserDaoImpl implements UserDao {
         }catch (Exception e){
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
-            return false;
+        } finally {
+            connectDB.closing();
         }
+        return false;
     }
 
     // Kiểm tra tồn tại
     public boolean exists(User user){
-        try {
+        try (Session session = connectDB.open()){
             Long count = session
                     .createQuery(QuerryMessage.USER_ISEXISTS, Long.class)
                     .setParameter("un", user.getUsername())
@@ -55,13 +59,15 @@ public class UserDaoImpl implements UserDao {
             return count != null && count > 0;
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            connectDB.closing();
         }
         return false;
     }
 
     // Tạo lại mật khẩu
     public boolean isEmailExists(String email) {
-        try {
+        try (Session session = connectDB.open()){
             Integer count = session
                     .createQuery(QuerryMessage.USER_CHECK_EMAIL, Integer.class)
                     .setParameter("email", email)
@@ -70,13 +76,15 @@ public class UserDaoImpl implements UserDao {
             return count != null && count > 0;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+        } finally {
+            connectDB.closing();
         }
+        return false;
     }
 
     public boolean resetPass(String email, String newPass){
         Transaction transaction = null;
-        try {
+        try (Session session = connectDB.open()){
             transaction = session.beginTransaction();
 
             Query query = session.createQuery(QuerryMessage.USER_PASSWORD_UPDATE);
@@ -93,8 +101,9 @@ public class UserDaoImpl implements UserDao {
                 transaction.rollback();
             }
             ex.printStackTrace();
-            return false;
+        } finally {
+            connectDB.closing();
         }
-
+        return false;
     }
 }

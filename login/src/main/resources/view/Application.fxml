@@ -18,52 +18,55 @@
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #0d0d0c;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #0d0d0c;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="root.controller.ApplicationController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <left>
             <VBox prefHeight="550.0" prefWidth="78.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" prefHeight="59.0" prefWidth="58.0" style="-fx-border-color: #6d6d6d; -fx-border-width: 3; -fx-border-radius: 4; -fx-background-color: #cacbcc; -fx-background-radius: 4;">
+                  <HBox alignment="CENTER" prefHeight="59.0" prefWidth="58.0" style="-fx-border-color: #6d6d6d; -fx-border-width: 3; -fx-border-radius: 4; -fx-background-color: #6d6d61; -fx-background-radius: 4;">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T T">
+                        <Text fill="#e4e4e4" strokeType="OUTSIDE" strokeWidth="0.0" text="T T">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Text>
                      </children>
                   </HBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+                  <Region prefHeight="0.0" prefWidth="58.0" VBox.vgrow="ALWAYS" />
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #242424; -fx-background-radius: 4;">
+                        <Button mnemonicParsing="false" style="-fx-background-color: #0d0d0c; -fx-background-radius: 4;">
                            <graphic>
                               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../java/root/assets/home.png" />
+                                    <Image url="@../assets/home.png" />
                                  </image>
                                  <effect>
-                                    <ColorAdjust brightness="1.0" />
+                                    <ColorAdjust brightness="0.37" contrast="-1.0" hue="0.13" saturation="1.0" />
                                  </effect>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #242424; -fx-background-radius: 4;">
+                        <Region prefHeight="0.0" prefWidth="58.0" VBox.vgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: #0d0d0c; -fx-background-radius: 4;">
                            <graphic>
                               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" scaleX="0.7" scaleY="0.7" scaleZ="0.7">
                                  <image>
-                                    <Image url="@../../java/root/assets/notifi.png" />
+                                    <Image url="@../assets/notifi.png" />
                                  </image>
                                  <effect>
-                                    <ColorAdjust brightness="1.0" />
+                                    <ColorAdjust brightness="0.37" contrast="-1.0" hue="0.13" saturation="1.0" />
                                  </effect>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #242424; -fx-background-radius: 4;">
+                        <Region prefHeight="0.0" prefWidth="58.0" VBox.vgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #0d0d0c; -fx-background-radius: 4;">
                            <graphic>
                               <FontIcon iconLiteral="fas-clipboard-list" iconSize="25">
                                  <effect>
-                                    <ColorAdjust brightness="1.0" />
+                                    <ColorAdjust brightness="0.37" contrast="-1.0" hue="0.13" saturation="1.0" />
                                  </effect>
                               </FontIcon>
                            </graphic>
@@ -71,26 +74,28 @@
                               <Insets bottom="10.0" left="18.0" right="18.0" top="10.0" />
                            </padding>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #242424; -fx-background-radius: 4;">
+                        <Region prefHeight="0.0" prefWidth="58.0" VBox.vgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: #0d0d0c; -fx-background-radius: 4;">
                            <graphic>
                               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" scaleX="0.7" scaleY="0.7" scaleZ="0.7">
                                  <image>
-                                    <Image url="@../../java/root/assets/table.png" />
+                                    <Image url="@../assets/table.png" />
                                  </image>
                                  <effect>
-                                    <ColorAdjust brightness="1.0" />
+                                    <ColorAdjust brightness="0.37" contrast="-1.0" hue="0.13" saturation="1.0" />
                                  </effect>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #242424; -fx-background-radius: 4;">
+                        <Region prefHeight="0.0" prefWidth="58.0" VBox.vgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: #0d0d0c; -fx-background-radius: 4;">
                            <graphic>
                               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" scaleX="0.7" scaleY="0.7" scaleZ="0.7">
                                  <image>
-                                    <Image url="@../../java/root/assets/gear.png" />
+                                    <Image url="@../assets/gear.png" />
                                  </image>
                                  <effect>
-                                    <ColorAdjust brightness="1.0" />
+                                    <ColorAdjust brightness="0.37" contrast="-1.0" hue="0.13" saturation="1.0" />
                                  </effect>
                               </ImageView>
                            </graphic>
@@ -103,16 +108,17 @@
                         <Insets bottom="20.0" top="20.0" />
                      </padding>
                   </VBox>
+                  <Region prefHeight="0.0" prefWidth="58.0" VBox.vgrow="ALWAYS" />
                   <VBox alignment="BOTTOM_CENTER" prefHeight="71.0" prefWidth="58.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="77.0" style="-fx-background-color: #242424; -fx-background-radius: 4;">
+                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="77.0" style="-fx-background-color: #0d0d0c; -fx-background-radius: 4;">
                            <graphic>
                               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../java/root/assets/logout.png" />
+                                    <Image url="@../assets/logout.png" />
                                  </image>
                                  <effect>
-                                    <ColorAdjust brightness="1.0" />
+                                    <ColorAdjust brightness="0.37" contrast="-1.0" hue="0.13" saturation="1.0" />
                                  </effect>
                               </ImageView>
                            </graphic>
@@ -149,7 +155,7 @@
                            <content>
                               <VBox alignment="TOP_CENTER" prefHeight="429.0" prefWidth="782.0" style="-fx-background-color: #0d0d0c;">
                                  <children>
-                                    <TilePane prefHeight="557.0" prefWidth="697.0" />
+                                    <TilePane fx:id="tableList" prefHeight="557.0" prefWidth="697.0" />
                                  </children></VBox>
                            </content>
                            <padding>
@@ -177,8 +183,8 @@
                                     </Region>
                                     <HBox fillHeight="false" prefHeight="21.0" prefWidth="100.0">
                                        <children>
-                                          <Button mnemonicParsing="false" text="Tất cả" />
                                           <Button mnemonicParsing="false" text="Đã đặt" />
+                                          <Button mnemonicParsing="false" text="Tất cả" />
                                        </children>
                                     </HBox>
                                  </children>

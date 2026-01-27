@@ -31,9 +31,6 @@ public class TableEntity {
     @Enumerated(EnumType.STRING)
     private TableStatus status;
 
-    @OneToMany(mappedBy = "table")
-    private List<Order> orders = new ArrayList<>();
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

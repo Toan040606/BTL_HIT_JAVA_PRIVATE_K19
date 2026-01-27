@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface TableDao {
     List<TableEntity> findAll();
-    void insert();
 }

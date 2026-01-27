@@ -8,8 +8,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import root.dao.TableDao;
+import root.dao.impl.TableDaoImpl;
 import root.service.UserAuth;
 import root.service.impl.UserAuthImpl;
+
+import java.io.IOException;
 
 public class AuthController {
     private final UserAuth userAuth = new UserAuthImpl();
@@ -161,7 +165,7 @@ public class AuthController {
     }
 
     @FXML
-    void handleLogin(ActionEvent event) {
+    void handleLogin(ActionEvent event) throws IOException {
         String username = txtUsernameLogin.getText();
         String password = txtPassLogin.getText();
         userAuth.login(username, password, lblMsgLogin);

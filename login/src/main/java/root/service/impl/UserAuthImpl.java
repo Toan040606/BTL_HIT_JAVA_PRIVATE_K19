@@ -1,7 +1,11 @@
 package root.service.impl;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import root.constant.ErrorMessage;
 import root.constant.SuccessMessage;
 import root.dao.UserDao;
@@ -9,10 +13,12 @@ import root.dao.impl.UserDaoImpl;
 import root.model.entity.core.User;
 import root.service.UserAuth;
 
+import java.io.IOException;
+
 
 public class UserAuthImpl implements UserAuth {
     public UserDao userDao = new UserDaoImpl();
-    public void login(String username, String password, Label lblMsg) {
+    public void login(String username, String password, Label lblMsg) throws IOException {
 
         if(username.isEmpty() || password.isEmpty()){
             lblMsg.setText(ErrorMessage.EMPTY_ERROR);
@@ -28,6 +34,9 @@ public class UserAuthImpl implements UserAuth {
         if(userDao.login(user)){
             lblMsg.setText(SuccessMessage.LOGIN_SUCCESS);
             lblMsg.setStyle("-fx-text-fill: #00ff99;");// xanh
+            Stage stage = (Stage) lblMsg.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("/view/Application.fxml"));
+            stage.setScene(new Scene(root));
         }else{
             lblMsg.setText(ErrorMessage.LOGIN_ERROR);
             lblMsg.setStyle("-fx-text-fill: red;");// đỏ
