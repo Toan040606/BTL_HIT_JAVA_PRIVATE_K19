@@ -9,24 +9,27 @@ import root.model.entity.User;
 import root.util.HibernateUtil;
 
 public class UserDaoImpl implements UserDao {
+    private final Session session = HibernateUtil.buildingSessionFactory().openSession();
     // Đăng nhập
     public boolean login(User user){
-        try (Session session = HibernateUtil.buildingSessionFactory().openSession()) {
+        try {
             return session
                     .createQuery(QuerryMessage.USER_LOGIN, User.class)
                     .setParameter("un", user.getUsername())
                     .setParameter("pw", user.getPassword())
                     .uniqueResult() != null;
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
             return false;
+        } finally {
+            session.close();
         }
     }
 
     // Đăng ký
     public boolean register(User user){
         Transaction transaction = null;
-        try (Session session = HibernateUtil.buildingSessionFactory().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             session.persist(user);
@@ -42,7 +45,7 @@ public class UserDaoImpl implements UserDao {
 
     // Kiểm tra tồn tại
     public boolean exists(User user){
-        try (Session session = HibernateUtil.buildingSessionFactory().openSession()) {
+        try {
             Long count = session
                     .createQuery(QuerryMessage.USER_ISEXISTS, Long.class)
                     .setParameter("un", user.getUsername())
@@ -58,7 +61,7 @@ public class UserDaoImpl implements UserDao {
 
     // Tạo lại mật khẩu
     public boolean isEmailExists(String email) {
-        try (Session session = HibernateUtil.buildingSessionFactory().openSession()){
+        try {
             Integer count = session
                     .createQuery(QuerryMessage.USER_CHECK_EMAIL, Integer.class)
                     .setParameter("email", email)
@@ -73,7 +76,7 @@ public class UserDaoImpl implements UserDao {
 
     public boolean resetPass(String email, String newPass){
         Transaction transaction = null;
-        try (Session session = HibernateUtil.buildingSessionFactory().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             Query query = session.createQuery(QuerryMessage.USER_PASSWORD_UPDATE);
@@ -83,7 +86,7 @@ public class UserDaoImpl implements UserDao {
             int rowsAffected = query.executeUpdate();
 
             transaction.commit();
-
+            System.out.println(rowsAffected);
             return rowsAffected > 0;
         }catch (Exception ex){
             if (transaction != null) {

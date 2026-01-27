@@ -12,8 +12,8 @@ module root.login {
 
     exports root;
     exports root.controller;
-    exports root.service;       // THÊM DÒNG NÀY
-    exports root.service.impl;  // THÊM DÒNG NÀY
+    exports root.service;
+    exports root.service.impl;
     exports root.model.entity;
     exports root.dao;
     exports root.dao.impl;

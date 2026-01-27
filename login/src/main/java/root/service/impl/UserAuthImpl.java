@@ -1,12 +1,14 @@
 package root.service.impl;
 
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import root.constant.ErrorMessage;
 import root.constant.SuccessMessage;
 import root.dao.UserDao;
 import root.dao.impl.UserDaoImpl;
 import root.model.entity.User;
 import root.service.UserAuth;
+
 
 public class UserAuthImpl implements UserAuth {
     public UserDao userDao = new UserDaoImpl();
@@ -71,7 +73,45 @@ public class UserAuthImpl implements UserAuth {
     }
 
     @Override
-    public void forgotPassword() {
+    public void findEmail(String email, Label lblMsg, BorderPane login, BorderPane register, BorderPane findEmail, BorderPane rsPass){
+        if (email.isEmpty()) {
+            lblMsg.setText(ErrorMessage.EMPTY_ERROR);
+            lblMsg.setStyle("-fx-text-fill: red;");// đỏ
+            return;
+        }
 
+        if (userDao.isEmailExists(email)) {
+            login.setVisible(false);
+            register.setVisible(false);
+            findEmail.setVisible(false);
+            rsPass.setVisible(true);
+        } else {
+            lblMsg.setText(ErrorMessage.INVALID_EMAIL_ERROR);
+            lblMsg.setStyle("-fx-text-fill: red;"); // đỏ
+        }
+    }
+
+    @Override
+    public void resetPassword(String email, String newPass, String confirm, Label lblMsg) {
+        if(newPass.isEmpty() || confirm.isEmpty()){
+            lblMsg.setText(ErrorMessage.EMPTY_ERROR);
+            lblMsg.setStyle("-fx-text-fill: red;");// đỏ
+            return;
+        }
+
+        if(!newPass.equals(confirm)){
+            lblMsg.setText(ErrorMessage.PASS_ERROR);
+            lblMsg.setStyle("-fx-text-fill: red;");// đỏ
+            return;
+        }
+
+        if(userDao.resetPass(email,newPass)){
+            lblMsg.setText(SuccessMessage.RESET_PASS_SUCCESS);
+            lblMsg.setStyle("-fx-text-fill: #00ff99;");// xanh
+        }
+        else{
+            lblMsg.setText(ErrorMessage.RESET_PASS_ERROR);
+            lblMsg.setStyle("-fx-text-fill: red;");// đỏ
+        }
     }
 }
