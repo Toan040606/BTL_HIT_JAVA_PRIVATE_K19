@@ -32,6 +32,6 @@ public class TableEntity {
     private TableStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "area_id")
+    private Area area;
 }

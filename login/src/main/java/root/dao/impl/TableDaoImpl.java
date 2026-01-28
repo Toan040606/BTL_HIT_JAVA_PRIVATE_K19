@@ -1,6 +1,7 @@
 package root.dao.impl;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import root.constant.QuerryMessage;
 import root.dao.TableDao;
 import root.model.entity.core.TableEntity;
@@ -23,5 +24,23 @@ public class TableDaoImpl implements TableDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public boolean createTable(TableEntity table) {
+        Transaction transaction;
+        try (Session session = connectDB.open()) {
+            transaction = session.beginTransaction();
+
+            session.persist(table);
+
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connectDB.closing();
+        }
+        return false;
     }
 }

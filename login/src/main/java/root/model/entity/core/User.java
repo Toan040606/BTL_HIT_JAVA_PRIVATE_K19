@@ -38,8 +38,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<FoodCategory> foodCategories = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<TableEntity> tables = new ArrayList<>();
+    @OneToMany(mappedBy = "area")
+    private List<Area> areas = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
