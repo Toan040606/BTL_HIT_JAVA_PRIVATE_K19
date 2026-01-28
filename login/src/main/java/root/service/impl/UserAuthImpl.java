@@ -161,9 +161,8 @@ public class UserAuthImpl implements UserAuth {
                     .otp(otp)
                     .expiredAt(OtpUtil.expiredAfterMinutes(5))
                     .build();
-            userDao.saveOtp(otpCode);
-
             EmailUtil.sendOtp(email,otp);
+            userDao.saveOtp(otpCode);
 
             lblMsg.setText(SuccessMessage.SEND_OTP_SUCCESS);
             lblMsg.setStyle("-fx-text-fill: #00ff99;");

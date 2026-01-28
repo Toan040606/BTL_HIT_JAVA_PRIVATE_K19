@@ -116,12 +116,20 @@ public class UserDaoImpl implements UserDao {
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            session.createQuery(QuerryMessage.DELETE_OTP)
+            LocalDateTime now = LocalDateTime.now();
+            //Xóa otp hêt hạn
+            session.createQuery(QuerryMessage.DELETE_EXPIRED_OTP)
+                    .setParameter("now",now)
+                    .executeUpdate();
+
+            // Xóa email cũ của email này
+            session.createQuery(QuerryMessage.DELETE_OTP_BY_EMAIL)
                     .setParameter("email", otpCode.getEmail())
                     .executeUpdate();
+
+
             session.persist(otpCode);
             transaction.commit();
-
 
         } catch (Exception e){
             if (transaction != null && transaction.isActive()) {
@@ -138,14 +146,32 @@ public class UserDaoImpl implements UserDao {
     @Override
     public OtpCode findValidOtp(String email,String otp){
         Session session = HibernateUtil.buildingSessionFactory().openSession();
+        Transaction transaction = null;
         try {
-            return session.createQuery(QuerryMessage.OTP_VALID, OtpCode.class)
+            transaction = session.beginTransaction();
+            LocalDateTime now = LocalDateTime.now();
+
+            OtpCode otpCode = session.createQuery(QuerryMessage.OTP_VALID, OtpCode.class)
                     .setParameter("email",email)
                     .setParameter("otp",otp)
-                    .setParameter("now", LocalDateTime.now())
+                    .setParameter("now",now)
                     .uniqueResult();
+
+            if(otpCode != null){
+                session.remove(otpCode);
+            }
+
+            transaction.commit();
+            return otpCode;
         } catch (Exception e){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
             throw new DatabaseException(ErrorMessage.DATABASE_CONNECTION_ERROR,e);
+        }finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
         }
     }
 }
