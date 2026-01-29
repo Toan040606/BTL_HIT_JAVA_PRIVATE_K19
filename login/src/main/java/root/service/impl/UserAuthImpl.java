@@ -1,7 +1,6 @@
 package root.service.impl;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import root.constant.ErrorMessage;
 import root.constant.SuccessMessage;
 import root.dao.UserDao;
@@ -89,27 +88,27 @@ public class UserAuthImpl implements UserAuth {
     }
 
     @Override
-    public void findEmail(String email, Label lblMsg, BorderPane login, BorderPane register, BorderPane findEmail, BorderPane rsPass){
+    public boolean findEmail(String email, Label lblMsg){
         try{
             if (email.isEmpty()) {
                 throw new AuthException(ErrorMessage.EMPTY_ERROR);
             }
 
-            if (userDao.isEmailExists(email)) {
-                login.setVisible(false);
-                register.setVisible(false);
-                findEmail.setVisible(false);
-                rsPass.setVisible(true);
-                lblMsg.setText("");
-            } else {
+            if (!userDao.isEmailExists(email)) {
                 throw new AuthException(ErrorMessage.INVALID_EMAIL_ERROR);
             }
+
+            sendOtpToEmail(email, lblMsg);
+            return true;
+
         }catch (AuthException e){
             lblMsg.setText(e.getMessage());
             lblMsg.setStyle("-fx-text-fill: red;");
+            return false;
         }catch (DatabaseException e){
             lblMsg.setText(ErrorMessage.DATABASE_CONNECTION_ERROR);
             lblMsg.setStyle("-fx-text-fill: orange;");
+            return false;
         }
     }
 
@@ -144,28 +143,62 @@ public class UserAuthImpl implements UserAuth {
         }
     }
 
-    public void sendOtpToEmail(String email, Label lblMsg) {
-        try{
-            if(email.isEmpty()){
+    @Override
+    public boolean verifyOtp(String email, String otp, Label lblMsg) {
+        try {
+            if (otp == null || otp.isEmpty()) {
                 throw new AuthException(ErrorMessage.EMPTY_ERROR);
             }
 
-            if(!userDao.isEmailExists(email)){
-                throw new AuthException(ErrorMessage.INVALID_EMAIL_ERROR);
+            OtpCode otpCode = userDao.findValidOtp(email, otp);
+
+            if (otpCode == null) {
+                throw new AuthException(ErrorMessage.VALID_OTP_ERROR);
             }
 
-            String otp = OtpUtil.otpCode();
-
-            OtpCode otpCode = OtpCode.builder()
-                    .email(email)
-                    .otp(otp)
-                    .expiredAt(OtpUtil.expiredAfterMinutes(5))
-                    .build();
-            EmailUtil.sendOtp(email,otp);
-            userDao.saveOtp(otpCode);
-
-            lblMsg.setText(SuccessMessage.SEND_OTP_SUCCESS);
+            lblMsg.setText(SuccessMessage.OTP_VERIFY_SUCCESS);
             lblMsg.setStyle("-fx-text-fill: #00ff99;");
+
+            return true;
+
+        } catch (AuthException e) {
+            lblMsg.setText(e.getMessage());
+            lblMsg.setStyle("-fx-text-fill: red;");
+            return false;
+        } catch (Exception e) {
+            lblMsg.setText(ErrorMessage.SYSTEM_ERROR);
+            lblMsg.setStyle("-fx-text-fill: orange;");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void processOtp(String email,Label lblMsg,String successMsg) throws AuthException{
+        if(email.isEmpty()){
+            throw new AuthException(ErrorMessage.EMPTY_ERROR);
+        }
+
+        if(!userDao.isEmailExists(email)){
+            throw new AuthException(ErrorMessage.INVALID_EMAIL_ERROR);
+        }
+
+        String otp = OtpUtil.otpCode();
+
+        OtpCode otpCode = OtpCode.builder()
+                .email(email)
+                .otp(otp)
+                .expiredAt(OtpUtil.expiredAfterMinutes(5))
+                .build();
+        EmailUtil.sendOtp(email,otp);
+        userDao.saveOtp(otpCode);
+
+        lblMsg.setText(successMsg);
+        lblMsg.setStyle("-fx-text-fill: #00ff99;");
+    }
+    @Override
+    public void sendOtpToEmail(String email, Label lblMsg) {
+        try{
+          processOtp(email,lblMsg,SuccessMessage.SEND_OTP_SUCCESS);
         }catch (AuthException e){
             lblMsg.setText(e.getMessage());
             lblMsg.setStyle("-fx-text-fill: red;");
@@ -176,4 +209,17 @@ public class UserAuthImpl implements UserAuth {
         }
     }
 
+    @Override
+    public void resendOtpToEmail(String email,Label lblMsg){
+        try{
+            processOtp(email,lblMsg,SuccessMessage.RESEND_OTP_SUCCESS);
+        }catch (AuthException e){
+            lblMsg.setText(e.getMessage());
+            lblMsg.setStyle("-fx-text-fill: red;");
+        }catch (Exception e){
+            lblMsg.setText(ErrorMessage.SYSTEM_ERROR);
+            lblMsg.setStyle("-fx-text-fill: orange;");
+            e.printStackTrace();
+        }
+    }
 }

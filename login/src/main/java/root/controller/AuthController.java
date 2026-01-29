@@ -127,11 +127,23 @@ public class AuthController {
     private Label usernameRegisterLabel;
 
     @FXML
+    private BorderPane otpForm;
+    @FXML
+    private TextField txtOtp;
+    @FXML
+    private Label lblMsgOtp;
+    @FXML
+    private Button resendOtpBtn;
+    @FXML
+    private Button verifyOtpBtn;
+
+    @FXML
     void initialize() {
         loginForm.setVisible(true);
         registerForm.setVisible(false);
         findEmailForm.setVisible(false);
         rsPasswordForm.setVisible(false);
+        otpForm.setVisible(false);
     }
 
     @FXML
@@ -148,7 +160,7 @@ public class AuthController {
         registerForm.setVisible(false);
         findEmailForm.setVisible(false);
         rsPasswordForm.setVisible(false);
-
+        otpForm.setVisible(false);
         loginForm.setVisible(true);
     }
 
@@ -161,7 +173,13 @@ public class AuthController {
     @FXML
     void handleFindEmailToGoResetPass(ActionEvent event) {
         email = txtFindEmail.getText();
-        userAuth.findEmail(email, lblMsgFindEmail, loginForm, registerForm, findEmailForm, rsPasswordForm);
+
+        boolean ok = userAuth.findEmail(email, lblMsgFindEmail);
+
+        if (ok) {
+            findEmailForm.setVisible(false);
+            otpForm.setVisible(true);
+        }
     }
 
     @FXML
@@ -191,4 +209,19 @@ public class AuthController {
         userAuth.resetPassword(email, newPass, confirm, lblMsgNewPass);
     }
 
+
+    @FXML
+    void handleVerifyOtp(ActionEvent event) {
+        String otp = txtOtp.getText();
+
+        if (userAuth.verifyOtp(email, otp, lblMsgOtp)) {
+            otpForm.setVisible(false);
+            rsPasswordForm.setVisible(true);
+        }
+    }
+
+    @FXML
+    void handleResendOtp(ActionEvent event) {
+        userAuth.resendOtpToEmail(email, lblMsgOtp);
+    }
 }
