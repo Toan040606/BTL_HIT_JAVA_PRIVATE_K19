@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="dd33c689-4c14-4507-8651-ff467ffccfdb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/login/src/main/java/root/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/java/root/controller/ApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/src/main/java/root/model/entity/core/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/java/root/model/entity/core/Area.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/src/main/java/root/model/entity/core/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/java/root/model/entity/core/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/src/main/java/root/service/impl/TableServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/java/root/service/impl/TableServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/src/main/java/root/util/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/java/root/util/HibernateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/src/main/resources/view/Application.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/resources/view/Application.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="399lujWOoWbwYrqsxktpAiGvDro" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feat/add-model-entity-and-table-list",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Code/BTL_Java_Private_K19"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dd33c689-4c14-4507-8651-ff467ffccfdb" name="Changes" comment="" />
+      <created>1770116392852</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1770116392852</updated>
+    </task>
+    <servers />
+  </component>
+</project>
