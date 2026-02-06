@@ -2,9 +2,13 @@ package root.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import root.constant.QuerryMessage;
 import root.dao.AreaDao;
 import root.model.entity.core.Area;
 import root.util.ConnectDB;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AreaDaoImpl implements AreaDao {
     ConnectDB connectDB = new ConnectDB();
@@ -24,5 +28,18 @@ public class AreaDaoImpl implements AreaDao {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<Area> findAll() {
+        try (Session session = connectDB.open()) {
+            List<Area> allAreas = session
+                    .createQuery(QuerryMessage.GET_ALL_AREA, Area.class)
+                    .getResultList();
+            System.out.println(allAreas);
+            return allAreas;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

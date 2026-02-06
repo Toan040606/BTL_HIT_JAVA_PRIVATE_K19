@@ -9,12 +9,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
+import root.dao.AreaDao;
+import root.dao.impl.AreaDaoImpl;
 import root.model.entity.core.Area;
 import root.service.AreaService;
+import root.service.TableService;
 import root.service.impl.AreaServiceImpl;
+import root.service.impl.TableServiceImpl;
+
+import java.util.List;
 
 public class ApplicationController {
     AreaService areaService = new AreaServiceImpl();
+    TableService tableService = new TableServiceImpl();
+    AreaDao areaDao = new AreaDaoImpl();
 
     @FXML
     private Button allTableBtn;
@@ -119,6 +127,10 @@ public class ApplicationController {
     void callCreateTable(ActionEvent event) {
         createTablePopup.setVisible(true);
         createTablePopup.setManaged(true);
+
+        List<Area> areas = areaDao.findAll();
+
+        tableService.showChooseAllArea(areas, chooseArea);
     }
 
     @FXML
@@ -143,12 +155,16 @@ public class ApplicationController {
 
         areaService.createArea(areaName);
         createAreaName.clear();
+        chooseArea.getItems().clear();
         createAreaPopup.setVisible(false);
         createAreaPopup.setManaged(false);
     }
 
     @FXML
     void confirmCreateTableInfo(ActionEvent event) {
+        String tableName = createTableNameField.getText();
+        int seats = Integer.parseInt(createTableSeatField.getText());
+        String chosenArea = chooseArea.getText();
 
     }
 

@@ -2,13 +2,66 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd33c689-4c14-4507-8651-ff467ffccfdb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/login/src/main/java/root/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/java/root/controller/ApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/src/main/java/root/model/entity/core/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/java/root/model/entity/core/Area.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/src/main/java/root/model/entity/core/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/java/root/model/entity/core/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/src/main/java/root/service/impl/TableServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/java/root/service/impl/TableServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/src/main/java/root/util/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/java/root/util/HibernateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/src/main/resources/view/Application.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/resources/view/Application.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/BTL_Java_Private_K19.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BTL_Java_Private_K19.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/.idea/dictionaries/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/.idea/dictionaries/project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/.idea/kotlinc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/constant/ErrorMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/constant/ErrorMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/constant/QuerryMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/constant/QuerryMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/constant/SuccessMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/constant/SuccessMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/controller/ApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/controller/compoments/TableCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/controller/compoments/TableCardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/dao/AreaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/dao/AreaDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/dao/TableDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/dao/TableDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/dao/impl/AreaDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/dao/impl/AreaDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/dao/impl/TableDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/dao/impl/TableDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/dao/impl/UserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/dao/impl/UserDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/core/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/core/Area.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/core/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/core/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/core/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/core/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/core/TableEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/core/TableEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/core/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/core/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/menu/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/menu/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/menu/FoodAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/menu/FoodAddon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/menu/FoodCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/menu/FoodCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/menu/OptionRequired.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/menu/OptionRequired.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/menu/OptionRequiredGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/menu/OptionRequiredGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/order/detail/FoodAddonItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/order/detail/FoodAddonItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/order/detail/OptionRequiredItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/order/detail/OptionRequiredItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/order/detail/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/order/detail/OrderItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/order/detail/TableOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/entity/order/detail/TableOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/enums/OrderStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/enums/OrderStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/enums/TableOrderStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/enums/TableOrderStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/enums/TableStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/model/enums/TableStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/service/AreaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/service/AreaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/service/TableService.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/service/TableService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/service/UserAuth.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/service/UserAuth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/service/impl/AreaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/service/impl/AreaServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/service/impl/TableServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/service/impl/TableServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/service/impl/UserAuthImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/service/impl/UserAuthImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/util/ConnectDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/util/ConnectDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/util/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/java/root/util/HibernateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSRestaurant/src/main/resources/view/Auth.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/POSRestaurant/src/main/resources/view/Auth.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQLQuerry/user_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQLQuerry/user_db.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,9 +71,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="399lujWOoWbwYrqsxktpAiGvDro" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -33,7 +86,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "feat/add-model-entity-and-table-list",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Code/BTL_Java_Private_K19"
+    "last_opened_file_path": "/run/media/toantran4606/New Volume/Code/BTL_Java_Private_K19/POSRestaurant"
   }
 }]]></component>
   <component name="TaskManager">

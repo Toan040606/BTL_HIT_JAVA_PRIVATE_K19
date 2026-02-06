@@ -603,7 +603,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="createTableNameField" prefHeight="25.0" prefWidth="435.0">
+                              <TextField fx:id="createTableNameField" onAction="#confirmCreateTableInfo" prefHeight="25.0" prefWidth="435.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -619,7 +619,7 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="createTableSeatField" prefHeight="30.0" prefWidth="43.0">
+                                    <TextField fx:id="createTableSeatField" onAction="#confirmCreateTableInfo" prefHeight="30.0" prefWidth="43.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -686,7 +686,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="createAreaName" prefHeight="25.0" prefWidth="435.0">
+                              <TextField fx:id="createAreaName" onAction="#confirmCreateArea" prefHeight="25.0" prefWidth="435.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

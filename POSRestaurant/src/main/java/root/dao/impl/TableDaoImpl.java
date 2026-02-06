@@ -3,6 +3,7 @@ package root.dao.impl;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import root.constant.QuerryMessage;
+import root.dao.AreaDao;
 import root.dao.TableDao;
 import root.model.entity.core.TableEntity;
 import root.util.ConnectDB;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class TableDaoImpl implements TableDao {
     ConnectDB connectDB = new ConnectDB();
+    AreaDao areaDao = new AreaDaoImpl();
 
     @Override
     public List<TableEntity> findAll() {

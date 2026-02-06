@@ -26,4 +26,6 @@ public class AreaServiceImpl implements AreaService {
             System.out.println("man");
         }
     }
+
+
 }
