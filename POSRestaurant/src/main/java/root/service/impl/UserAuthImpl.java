@@ -3,7 +3,9 @@ package root.service.impl;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import root.constant.ErrorMessage;
@@ -12,6 +14,7 @@ import root.dao.UserDao;
 import root.dao.impl.UserDaoImpl;
 import root.model.entity.core.User;
 import root.service.UserAuth;
+import root.util.UserSession;
 
 import java.io.IOException;
 
@@ -123,5 +126,12 @@ public class UserAuthImpl implements UserAuth {
             lblMsg.setText(ErrorMessage.RESET_PASS_ERROR);
             lblMsg.setStyle("-fx-text-fill: red;");// đỏ
         }
+    }
+
+    public void logout(ImageView logoutBtn) throws IOException {
+        UserSession.logout();
+        Stage stage = (Stage) logoutBtn.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Auth.fxml"));
+        stage.setScene(new Scene(root));
     }
 }

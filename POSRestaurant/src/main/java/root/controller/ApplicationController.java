@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
@@ -14,9 +15,13 @@ import root.dao.impl.AreaDaoImpl;
 import root.model.entity.core.Area;
 import root.service.AreaService;
 import root.service.TableService;
+import root.service.UserAuth;
 import root.service.impl.AreaServiceImpl;
 import root.service.impl.TableServiceImpl;
+import root.service.impl.UserAuthImpl;
+import root.util.UserSession;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ApplicationController {
@@ -88,6 +93,9 @@ public class ApplicationController {
     private BorderPane tablePage;
 
     @FXML
+    private ImageView logoutBtn;
+
+    @FXML
     void initialize() {
         restaurantPage.setVisible(false);
         tablePage.setVisible(false);
@@ -144,6 +152,7 @@ public class ApplicationController {
     void closeCreateTablePopup(ActionEvent event) {
         createTableNameField.clear();
         createTableSeatField.clear();
+        chooseArea.getItems().clear();
         createTablePopup.setVisible(false);
         createTablePopup.setManaged(false);
     }
@@ -154,8 +163,8 @@ public class ApplicationController {
         String areaName = createAreaName.getText();
 
         areaService.createArea(areaName);
+
         createAreaName.clear();
-        chooseArea.getItems().clear();
         createAreaPopup.setVisible(false);
         createAreaPopup.setManaged(false);
     }
@@ -166,6 +175,14 @@ public class ApplicationController {
         int seats = Integer.parseInt(createTableSeatField.getText());
         String chosenArea = chooseArea.getText();
 
+        chooseArea.getItems().clear();
+
+
     }
 
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+        UserAuth userAuth = new UserAuthImpl();
+        userAuth.logout(logoutBtn);
+    }
 }

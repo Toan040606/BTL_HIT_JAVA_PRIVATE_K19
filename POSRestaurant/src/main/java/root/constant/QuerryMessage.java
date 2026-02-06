@@ -6,5 +6,5 @@ public class QuerryMessage {
     public static final String USER_CHECK_EMAIL  = "SELECT 1 FROM User WHERE email = :email";
     public static final String USER_PASSWORD_UPDATE  = "UPDATE User u SET u.password = :pw WHERE u.email = :email";
     public static final String GET_ALL_TABLE = "FROM TableEntity";
-    public static final String GET_ALL_AREA = "FROM Area";
+    public static final String GET_ALL_AREA = "FROM Area a ORDER BY a.name ASC";
 }

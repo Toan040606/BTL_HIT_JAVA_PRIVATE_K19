@@ -7,19 +7,20 @@ import root.constant.QuerryMessage;
 import root.dao.UserDao;
 import root.model.entity.core.User;
 import root.util.ConnectDB;
+import root.util.UserSession;
 
 public class UserDaoImpl implements UserDao {
     ConnectDB connectDB = new ConnectDB();
     // Đăng nhập
     public boolean login(User user){
         try (Session session = connectDB.open()){
-            User a = session
+            UserSession.setCurrentUser(session
                     .createQuery(QuerryMessage.USER_LOGIN, User.class)
                     .setParameter("un", user.getUsername())
                     .setParameter("pw", user.getPassword())
-                    .uniqueResult();
+                    .uniqueResult());
 
-            return a != null;
+            return UserSession.currentUser != null;
         } catch (Exception e){
             e.printStackTrace();
             return false;

@@ -12,9 +12,11 @@ import root.dao.impl.TableDaoImpl;
 import root.model.entity.core.Area;
 import root.model.entity.core.TableEntity;
 import root.service.TableService;
+import root.util.UserSession;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TableServiceImpl implements TableService {
     TableDao tableDao = new TableDaoImpl();
@@ -28,11 +30,13 @@ public class TableServiceImpl implements TableService {
     @Override
     public void showChooseAllArea(List<Area> areas, MenuButton chooseArea) {
         areas.forEach((area) -> {
-            MenuItem menuItem = new MenuItem(area.getName());
-            chooseArea.getItems().add(menuItem);
-            menuItem.setOnAction(actionEvent -> {
-                chooseArea.setText(menuItem.getText());
-            });
+            if (Objects.equals(UserSession.currentUser.getId(), area.getUser().getId())) {
+                MenuItem menuItem = new MenuItem(area.getName());
+                chooseArea.getItems().add(menuItem);
+                menuItem.setOnAction(actionEvent -> {
+                    chooseArea.setText(menuItem.getText());
+                });
+            }
         });
     }
 

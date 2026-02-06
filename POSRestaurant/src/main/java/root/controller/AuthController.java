@@ -190,5 +190,4 @@ public class AuthController {
 
         userAuth.resetPassword(email, newPass, confirm, lblMsgNewPass);
     }
-
 }
