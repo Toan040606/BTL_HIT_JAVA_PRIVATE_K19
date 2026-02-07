@@ -30,5 +30,10 @@ public class AreaServiceImpl implements AreaService {
         }
     }
 
+    @Override
+    public void showArea() {
+        
+    }
+
 
 }

@@ -9,4 +9,5 @@ import java.util.List;
 public interface TableService {
     void showTable(TilePane tableList);
     void showChooseAllArea(List<Area> areas, MenuButton chooseArea);
+    void createTable(String tableName, int seats);
 }

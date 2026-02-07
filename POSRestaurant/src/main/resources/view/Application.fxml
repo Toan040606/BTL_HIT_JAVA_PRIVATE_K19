@@ -354,11 +354,11 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </HBox>
-                                          <HBox fx:id="areaManagerBtn" alignment="CENTER_LEFT" fillHeight="false" prefHeight="46.0" prefWidth="188.0">
+                                          <HBox fx:id="areaManagerBtn" accessibleRole="BUTTON" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#goAreaManager" prefHeight="46.0" prefWidth="188.0">
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="188.0" spacing="4.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quản lý khu vực">
+                                                      <Text accessibleRole="BUTTON" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quản lý khu vực">
                                                          <font>
                                                             <Font name="System Bold" size="16.0" />
                                                          </font>
@@ -520,12 +520,12 @@
                               </ScrollPane>
                            </left>
                            <center>
-                              <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #242421;" BorderPane.alignment="CENTER">
+                              <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <BorderPane.margin>
                                     <Insets left="10.0" />
                                  </BorderPane.margin>
                                  <children>
-                                    <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                    <BorderPane fx:id="areaManager" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #242421;" visible="false">
                                        <top>
                                           <HBox alignment="CENTER" prefHeight="46.0" prefWidth="471.0" BorderPane.alignment="CENTER">
                                              <children>
@@ -534,12 +534,12 @@
                                                       <Font name="System Bold" size="20.0" />
                                                    </font>
                                                 </Text>
-                                                <Region prefHeight="27.0" prefWidth="165.0" HBox.hgrow="ALWAYS">
+                                                <Region prefHeight="27.0" prefWidth="69.0" HBox.hgrow="ALWAYS">
                                                    <padding>
                                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                    </padding>
                                                 </Region>
-                                                <Button fx:id="createTableBtn" focusTraversable="false" mnemonicParsing="false" onAction="#callCreateTable" prefHeight="27.0" prefWidth="99.0" text="Tạo bàn">
+                                                <Button fx:id="createTableBtn" focusTraversable="false" mnemonicParsing="false" onAction="#callCreateTable" prefHeight="27.0" prefWidth="105.0" text="Tạo bàn">
                                                    <font>
                                                       <Font size="13.0" />
                                                    </font>
@@ -547,7 +547,15 @@
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </Button>
-                                                <Button fx:id="createAreaBtn" mnemonicParsing="false" onAction="#callCreateArea" prefHeight="25.0" prefWidth="125.0" text="Tạo khu vực">
+                                                <Button fx:id="createAreaBtn" mnemonicParsing="false" onAction="#callCreateArea" prefHeight="27.0" prefWidth="123.0" text="Tạo khu vực">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <Button fx:id="deleteAreaBtn" layoutX="375.0" layoutY="20.0" mnemonicParsing="false" onAction="#callDeleteArea" prefHeight="27.0" prefWidth="136.0" text="Xoá khu vực">
                                                    <font>
                                                       <Font size="13.0" />
                                                    </font>

@@ -30,8 +30,10 @@ public class TableDaoImpl implements TableDao {
 
     @Override
     public boolean createTable(TableEntity table) {
+        Session session = null;
         Transaction transaction = null;
-        try (Session session = connectDB.open()) {
+        try {
+            session = connectDB.open();
             transaction = session.beginTransaction();
 
             session.persist(table);
@@ -41,7 +43,30 @@ public class TableDaoImpl implements TableDao {
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
         }
         return false;
+    }
+
+    @Override
+    public void update(TableEntity table) {
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = connectDB.open();
+            transaction = session.beginTransaction();
+
+            session.merge(table); // hoặc update()
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) transaction.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 }

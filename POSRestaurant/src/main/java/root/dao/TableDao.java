@@ -7,4 +7,5 @@ import java.util.List;
 public interface TableDao {
     List<TableEntity> findAll();
     boolean createTable(TableEntity table);
+    void update(TableEntity table);
 }

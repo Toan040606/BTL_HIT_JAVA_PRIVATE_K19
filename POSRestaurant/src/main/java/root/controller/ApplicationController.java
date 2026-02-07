@@ -7,6 +7,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
@@ -25,12 +26,15 @@ import java.io.IOException;
 import java.util.List;
 
 public class ApplicationController {
-    AreaService areaService = new AreaServiceImpl();
-    TableService tableService = new TableServiceImpl();
-    AreaDao areaDao = new AreaDaoImpl();
+    AreaService areaService;
+    TableService tableService;
+    AreaDao areaDao;
 
     @FXML
     private Button allTableBtn;
+
+    @FXML
+    private BorderPane areaManager;
 
     @FXML
     private HBox areaManagerBtn;
@@ -75,10 +79,16 @@ public class ApplicationController {
     private TextField createTableSeatField;
 
     @FXML
+    private Button deleteAreaBtn;
+
+    @FXML
     private Button goConfigurationBtn;
 
     @FXML
     private Button goTablePageBtn;
+
+    @FXML
+    private ImageView logoutBtn;
 
     @FXML
     private BorderPane restaurantPage;
@@ -93,10 +103,11 @@ public class ApplicationController {
     private BorderPane tablePage;
 
     @FXML
-    private ImageView logoutBtn;
-
-    @FXML
     void initialize() {
+        areaService = new AreaServiceImpl();
+        tableService = new TableServiceImpl();
+        areaDao = new AreaDaoImpl();
+
         restaurantPage.setVisible(false);
         tablePage.setVisible(false);
         createAreaPopup.setManaged(false);
@@ -171,18 +182,32 @@ public class ApplicationController {
 
     @FXML
     void confirmCreateTableInfo(ActionEvent event) {
+        TableService tableService = new TableServiceImpl();
+
         String tableName = createTableNameField.getText();
         int seats = Integer.parseInt(createTableSeatField.getText());
-        String chosenArea = chooseArea.getText();
+
+        tableService.createTable(tableName, seats);
 
         chooseArea.getItems().clear();
-
-
+        createTablePopup.setVisible(false);
+        createTablePopup.setManaged(false);
     }
 
     @FXML
     void logout(ActionEvent event) throws IOException {
         UserAuth userAuth = new UserAuthImpl();
         userAuth.logout(logoutBtn);
+    }
+
+    @FXML
+    void callDeleteArea(ActionEvent event) {
+
+    }
+
+    @FXML
+    void goAreaManager(MouseEvent event) {
+        areaManager.setVisible(true);
+        areaManager.setManaged(true);
     }
 }
