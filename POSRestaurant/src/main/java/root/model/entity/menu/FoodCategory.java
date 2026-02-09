@@ -25,10 +25,6 @@ public class FoodCategory {
     private boolean active;
 
     @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private FoodCategory parent;
-
-    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

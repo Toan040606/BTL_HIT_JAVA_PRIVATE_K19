@@ -59,7 +59,7 @@ public class TableDaoImpl implements TableDao {
             session = connectDB.open();
             transaction = session.beginTransaction();
 
-            session.merge(table); // hoặc update()
+            session.merge(table);
 
             transaction.commit();
         } catch (Exception e) {

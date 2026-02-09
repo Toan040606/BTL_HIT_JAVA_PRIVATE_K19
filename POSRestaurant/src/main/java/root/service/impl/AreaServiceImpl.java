@@ -4,7 +4,6 @@ import root.constant.ErrorMessage;
 import root.dao.AreaDao;
 import root.dao.impl.AreaDaoImpl;
 import root.model.entity.core.Area;
-import root.model.entity.core.User;
 import root.service.AreaService;
 import root.util.UserSession;
 
@@ -24,9 +23,9 @@ public class AreaServiceImpl implements AreaService {
                 .build();
 
         if (areaDao.createArea(area)) {
-            System.out.println("gud");
+            System.out.println("area gud");
         } else {
-            System.out.println("man");
+            System.out.println("area man");
         }
     }
 

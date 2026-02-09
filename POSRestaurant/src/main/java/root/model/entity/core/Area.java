@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = {"user"})
 public class Area {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

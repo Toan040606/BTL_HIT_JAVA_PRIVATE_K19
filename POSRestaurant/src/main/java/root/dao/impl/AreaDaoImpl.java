@@ -7,7 +7,6 @@ import root.dao.AreaDao;
 import root.model.entity.core.Area;
 import root.util.ConnectDB;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AreaDaoImpl implements AreaDao {

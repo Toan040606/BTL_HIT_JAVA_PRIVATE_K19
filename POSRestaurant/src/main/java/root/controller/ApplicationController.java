@@ -13,22 +13,27 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import root.dao.AreaDao;
 import root.dao.impl.AreaDaoImpl;
+import root.dao.impl.FoodCategoryDaoImpl;
 import root.model.entity.core.Area;
 import root.service.AreaService;
+import root.service.FoodCategoryService;
 import root.service.TableService;
 import root.service.UserAuth;
 import root.service.impl.AreaServiceImpl;
+import root.service.impl.FoodCategoryServiceImpl;
 import root.service.impl.TableServiceImpl;
 import root.service.impl.UserAuthImpl;
-import root.util.UserSession;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 public class ApplicationController {
+    Scanner scanner = new Scanner(System.in);
     AreaService areaService;
     TableService tableService;
     AreaDao areaDao;
+    FoodCategoryService foodCategoryService;
 
     @FXML
     private Button allTableBtn;
@@ -107,6 +112,14 @@ public class ApplicationController {
         areaService = new AreaServiceImpl();
         tableService = new TableServiceImpl();
         areaDao = new AreaDaoImpl();
+        foodCategoryService = new FoodCategoryServiceImpl();
+
+
+        System.out.println("Nhập tên loại đồ ăn: "); String name = scanner.nextLine();
+        System.out.println("Nhập số thứ tự hiển thị (Từ đầu xuống cuối): "); int sortCategory = scanner.nextInt();
+        System.out.println("Nhập trạng thái (bật/tắt"); boolean active = scanner.nextBoolean();
+
+        foodCategoryService.createFoodCategory(name, sortCategory, active);
 
         restaurantPage.setVisible(false);
         tablePage.setVisible(false);
@@ -189,6 +202,8 @@ public class ApplicationController {
 
         tableService.createTable(tableName, seats);
 
+        tableService.showTable(tableList);
+
         chooseArea.getItems().clear();
         createTablePopup.setVisible(false);
         createTablePopup.setManaged(false);
@@ -209,5 +224,7 @@ public class ApplicationController {
     void goAreaManager(MouseEvent event) {
         areaManager.setVisible(true);
         areaManager.setManaged(true);
+
+        tableService.showTable(tableList);
     }
 }
