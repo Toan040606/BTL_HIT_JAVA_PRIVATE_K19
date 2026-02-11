@@ -18,6 +18,8 @@ public class FoodAddon {
 
     private double price;
 
+    private boolean active;
+
     @ManyToOne
     @JoinColumn(name = "food_id")
     private Food food;

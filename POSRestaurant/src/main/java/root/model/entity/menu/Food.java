@@ -34,6 +34,10 @@ public class Food {
 
     private boolean active;
 
+    private boolean haveFoodAddons;
+
+    private boolean haveOptionRequired;
+
     @OneToMany(mappedBy = "food", cascade = CascadeType.ALL)
     private List<FoodAddon> foodAddons = new ArrayList<>();
 

@@ -2,24 +2,26 @@ package root.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import root.dao.FoodDao;
-import root.model.entity.menu.Food;
+import root.dao.OptionRequiredDao;
+import root.model.entity.menu.OptionRequired;
 import root.util.ConnectDB;
 
-public class FoodDaoImpl implements FoodDao {
+public class OptionRequiredDaoImpl implements OptionRequiredDao {
     ConnectDB connectDB = new ConnectDB();
 
-    public boolean createFood(Food food) {
+    public boolean createOR(OptionRequired optionRequired) {
         Transaction transaction = null;
         try (Session session = connectDB.open()) {
             transaction = session.beginTransaction();
 
-            session.persist(food);
+            session.persist(optionRequired);
 
             transaction.commit();
             return true;
         } catch (Exception e) {
-            if (transaction != null) {transaction.rollback();}
+            if (transaction != null) {
+                transaction.rollback();
+            }
             return false;
         }
     }

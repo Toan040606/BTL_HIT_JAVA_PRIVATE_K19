@@ -19,7 +19,7 @@ public class OptionRequiredGroup {
 
     private String name;
 
-    private boolean required;
+    private boolean active;
 
     @ManyToOne
     @JoinColumn(name = "food_id")

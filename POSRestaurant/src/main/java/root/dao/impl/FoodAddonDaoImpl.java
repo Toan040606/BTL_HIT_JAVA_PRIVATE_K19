@@ -2,19 +2,19 @@ package root.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import root.dao.FoodDao;
-import root.model.entity.menu.Food;
+import root.dao.FoodAddonDao;
+import root.model.entity.menu.FoodAddon;
 import root.util.ConnectDB;
 
-public class FoodDaoImpl implements FoodDao {
+public class FoodAddonDaoImpl implements FoodAddonDao {
     ConnectDB connectDB = new ConnectDB();
 
-    public boolean createFood(Food food) {
+    public boolean createFoodAddon(FoodAddon foodAddon) {
         Transaction transaction = null;
         try (Session session = connectDB.open()) {
             transaction = session.beginTransaction();
 
-            session.persist(food);
+            session.persist(foodAddon);
 
             transaction.commit();
             return true;

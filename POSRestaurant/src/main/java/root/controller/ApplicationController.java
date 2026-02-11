@@ -114,13 +114,6 @@ public class ApplicationController {
         areaDao = new AreaDaoImpl();
         foodCategoryService = new FoodCategoryServiceImpl();
 
-
-        System.out.println("Nhập tên loại đồ ăn: "); String name = scanner.nextLine();
-        System.out.println("Nhập số thứ tự hiển thị (Từ đầu xuống cuối): "); int sortCategory = scanner.nextInt();
-        System.out.println("Nhập trạng thái (bật/tắt"); boolean active = scanner.nextBoolean();
-
-        foodCategoryService.createFoodCategory(name, sortCategory, active);
-
         restaurantPage.setVisible(false);
         tablePage.setVisible(false);
         createAreaPopup.setManaged(false);
@@ -226,5 +219,13 @@ public class ApplicationController {
         areaManager.setManaged(true);
 
         tableService.showTable(tableList);
+    }
+
+    private void createFoodCategory() {
+        System.out.println("Nhập tên loại đồ ăn: "); String name = scanner.nextLine();
+        System.out.println("Nhập số thứ tự hiển thị (Từ đầu xuống cuối): "); int sortCategory = scanner.nextInt();
+        System.out.println("Nhập trạng thái (bật/tắt"); boolean active = scanner.nextBoolean();
+
+        foodCategoryService.createFoodCategory(name, sortCategory, active);
     }
 }
