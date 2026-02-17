@@ -9,4 +9,6 @@ public class ErrorMessage {
     public static final String REGISTER_ERROR  = "Đăng ký không thành công!";
     public static final String RESET_PASS_ERROR  = "Đổi mật khẩu không thành công!";
     public static final String INVALID_EMAIL_ERROR = "Email không tồn tại trong hệ thống!";
+    public static final String ADD_FOOD_ERROR = "Thêm món ăn vào order không thành công!";
+    public static final String ADD_FOOD_EMPTY_ERROR = "Order or food rỗng!";
 }
