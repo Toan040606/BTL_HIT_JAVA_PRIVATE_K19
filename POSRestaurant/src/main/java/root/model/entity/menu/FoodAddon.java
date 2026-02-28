@@ -3,6 +3,9 @@ package root.model.entity.menu;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -20,7 +23,10 @@ public class FoodAddon {
 
     private boolean active;
 
-    @ManyToOne
-    @JoinColumn(name = "food_id")
-    private Food food;
+    @ManyToMany
+    @JoinTable(name = "Food_FoodAddon",
+        joinColumns = {@JoinColumn(name = "foodAddon_id")},
+        inverseJoinColumns = {@JoinColumn(name = "food_id")}
+    )
+    private List<Food> foods = new ArrayList<>();
 }

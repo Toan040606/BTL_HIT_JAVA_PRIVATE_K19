@@ -10,6 +10,8 @@ module root.login {
     requires annotations;
     requires java.naming;
     requires java.desktop;
+    requires jbcrypt;
+    requires jakarta.mail;
 
     exports root;
     exports root.controller;
@@ -22,7 +24,7 @@ module root.login {
     exports root.model.entity.menu;
 
     opens root.controller to javafx.fxml;
-    opens root.controller.compoments to javafx.fxml;
+    opens root.controller.components to javafx.fxml;
     opens root.model.entity.order.detail to org.hibernate.orm.core;
     opens root.model.entity.core to org.hibernate.orm.core;
     opens root.model.entity.menu to org.hibernate.orm.core;

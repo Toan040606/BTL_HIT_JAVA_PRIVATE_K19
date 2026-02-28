@@ -21,9 +21,12 @@ public class OptionRequiredGroup {
 
     private boolean active;
 
-    @ManyToOne
-    @JoinColumn(name = "food_id")
-    private Food food;
+    @ManyToMany
+    @JoinTable(name = "Food_ORG",
+        joinColumns = {@JoinColumn(name = "ORG_id")},
+        inverseJoinColumns = {@JoinColumn(name = "food_id")}
+    )
+    private List<Food> foods = new ArrayList<>();
 
     @OneToMany(mappedBy = "optionRequiredGroup")
     private List<OptionRequired> optionsRequired = new ArrayList<>();

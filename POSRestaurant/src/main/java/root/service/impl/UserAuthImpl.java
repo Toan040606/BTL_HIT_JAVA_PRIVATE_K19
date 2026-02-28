@@ -3,7 +3,6 @@ package root.service.impl;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -14,6 +13,7 @@ import root.dao.UserDao;
 import root.dao.impl.UserDaoImpl;
 import root.model.entity.core.User;
 import root.service.UserAuth;
+import root.util.PasswordUtil;
 import root.util.UserSession;
 
 import java.io.IOException;
@@ -55,12 +55,14 @@ public class UserAuthImpl implements UserAuth {
             return;
         }
 
+        String hashedPassword = PasswordUtil.hashPassword(pass);
+
         User user = User.builder()
                 .firstName(firstName)
                 .lastName(lastName)
                 .username(username)
                 .email(email)
-                .password(pass)
+                .password(hashedPassword)
                 .build();
 
         if(userDao.exists(user)){
@@ -118,7 +120,9 @@ public class UserAuthImpl implements UserAuth {
             return;
         }
 
-        if(userDao.resetPass(email,newPass)){
+        String hashedNewPass = PasswordUtil.hashPassword(newPass);
+
+        if(userDao.resetPass(email, hashedNewPass)){
             lblMsg.setText(SuccessMessage.RESET_PASS_SUCCESS);
             lblMsg.setStyle("-fx-text-fill: #00ff99;");// xanh
         }

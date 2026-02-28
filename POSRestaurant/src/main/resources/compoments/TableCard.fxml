@@ -8,28 +8,33 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="160.0" style="-fx-background-color: #292926;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="root.controller.compoments.TableCardController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="160.0" style="-fx-background-color: #292926;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="root.controller.components.TableCardController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Bàn ">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Text>
-            <Label fx:id="tableName" prefHeight="15.0" prefWidth="34.0" textFill="WHITE">
+            <Label fx:id="areaName" prefHeight="19.0" prefWidth="62.0" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Region prefHeight="50.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
-            <Label fx:id="tableStatus" text="Status" textFill="WHITE">
+            <Region prefHeight="45.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+            <Label fx:id="tableName" layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="62.0" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
          </children>
       </HBox>
+      <Label fx:id="tableStatus" text="Status" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
       <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="150.0">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Chỗ ngồi: ">

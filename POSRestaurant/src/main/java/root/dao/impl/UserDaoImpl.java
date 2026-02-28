@@ -8,6 +8,7 @@ import root.dao.UserDao;
 import root.model.entity.core.User;
 import root.util.ConnectDB;
 import root.util.UserSession;
+import root.util.PasswordUtil;
 
 public class UserDaoImpl implements UserDao {
     ConnectDB connectDB = new ConnectDB();
@@ -17,10 +18,11 @@ public class UserDaoImpl implements UserDao {
             UserSession.setCurrentUser(session
                     .createQuery(QuerryMessage.USER_LOGIN, User.class)
                     .setParameter("un", user.getUsername())
-                    .setParameter("pw", user.getPassword())
                     .uniqueResult());
 
-            return UserSession.currentUser != null;
+            if (UserSession.currentUser == null) return false;
+
+            return PasswordUtil.checkPassword(user.getPassword(), UserSession.currentUser.getPassword());
         } catch (Exception e){
             e.printStackTrace();
             return false;
@@ -63,8 +65,8 @@ public class UserDaoImpl implements UserDao {
     // Tạo lại mật khẩu
     public boolean isEmailExists(String email) {
         try (Session session = connectDB.open()){
-            Integer count = session
-                    .createQuery(QuerryMessage.USER_CHECK_EMAIL, Integer.class)
+            Long count = session
+                    .createQuery(QuerryMessage.USER_CHECK_EMAIL, Long.class)
                     .setParameter("email", email)
                     .uniqueResult();
 
@@ -97,4 +99,5 @@ public class UserDaoImpl implements UserDao {
         }
         return false;
     }
+
 }

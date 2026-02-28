@@ -2,29 +2,31 @@ package root.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import root.controller.components.FoodItemController;
 import root.dao.AreaDao;
+import root.dao.FoodCategoryDao;
 import root.dao.impl.AreaDaoImpl;
 import root.dao.impl.FoodCategoryDaoImpl;
 import root.model.entity.core.Area;
-import root.service.AreaService;
-import root.service.FoodCategoryService;
-import root.service.TableService;
-import root.service.UserAuth;
-import root.service.impl.AreaServiceImpl;
-import root.service.impl.FoodCategoryServiceImpl;
-import root.service.impl.TableServiceImpl;
-import root.service.impl.UserAuthImpl;
+import root.model.entity.menu.FoodCategory;
+import root.service.*;
+import root.service.impl.*;
 
+import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,9 +36,16 @@ public class ApplicationController {
     TableService tableService;
     AreaDao areaDao;
     FoodCategoryService foodCategoryService;
+    FileChooser fileChooser;
+    ImgServiceImpl imgService;
+    FoodService foodService;
+    FoodCategoryDao  foodCategoryDao;
 
     @FXML
-    private Button allTableBtn;
+    private StackPane container;
+
+    @FXML
+    private ToggleButton allTable;
 
     @FXML
     private BorderPane areaManager;
@@ -45,19 +54,34 @@ public class ApplicationController {
     private HBox areaManagerBtn;
 
     @FXML
-    private Button bookedTableBtn;
+    private ToggleButton bookedTable;
 
     @FXML
     private MenuButton chooseArea;
 
     @FXML
+    private MenuButton chooseCategory;
+
+    @FXML
     private Button closeCreateAreaBtn;
+
+    @FXML
+    private Button closeCreateFoodCategoryBtn;
 
     @FXML
     private Button closeCreateTableBtn;
 
     @FXML
+    private Button closeCreateFoodBtn;
+
+    @FXML
     private Button confirmCreateAreaBtn;
+
+    @FXML
+    private Button confirmCreateFoodCategoryBtn;
+
+    @FXML
+    private Button confirmCreateFoodInfoBtn;
 
     @FXML
     private Button confirmCreateTableInfoBtn;
@@ -70,6 +94,33 @@ public class ApplicationController {
 
     @FXML
     private BorderPane createAreaPopup;
+
+    @FXML
+    private Button createFoodBtn;
+
+    @FXML
+    private Button createFoodCategoryBtn;
+
+    @FXML
+    private TextField createFoodCategoryName;
+
+    @FXML
+    private BorderPane createFoodCategoryPopup;
+
+    @FXML
+    private TextArea createFoodDesField;
+
+    @FXML
+    private TextField createFoodNameField;
+
+    @FXML
+    private BorderPane createFoodPopup;
+
+    @FXML
+    private TextField createFoodPriceField;
+
+    @FXML
+    private TextField createSortOrderFoodCategory;
 
     @FXML
     private Button createTableBtn;
@@ -85,6 +136,21 @@ public class ApplicationController {
 
     @FXML
     private Button deleteAreaBtn;
+
+    @FXML
+    private Button deleteFoodCategoryBtn;
+
+    @FXML
+    private Button editFoodCategoryBtn;
+
+    @FXML
+    private Accordion foodCategory;
+
+    @FXML
+    private BorderPane foodManager;
+
+    @FXML
+    private HBox foodManagerBtn;
 
     @FXML
     private Button goConfigurationBtn;
@@ -108,11 +174,17 @@ public class ApplicationController {
     private BorderPane tablePage;
 
     @FXML
+    private Button uploadImgBtn;
+
+    @FXML
     void initialize() {
         areaService = new AreaServiceImpl();
         tableService = new TableServiceImpl();
         areaDao = new AreaDaoImpl();
         foodCategoryService = new FoodCategoryServiceImpl();
+        imgService = new ImgServiceImpl();
+        foodService = new FoodServiceImpl();
+        foodCategoryDao = new FoodCategoryDaoImpl();
 
         restaurantPage.setVisible(false);
         tablePage.setVisible(false);
@@ -124,22 +196,28 @@ public class ApplicationController {
     void goConfiguration(ActionEvent event) {
         restaurantPage.setVisible(true);
         tablePage.setVisible(false);
+
+        tableList.getChildren().clear();
     }
 
     @FXML
-    void goTablePage(ActionEvent event) {
+    void goTablePage(ActionEvent event) throws IOException {
         restaurantPage.setVisible(false);
         tablePage.setVisible(true);
+
+        tableList.getChildren().clear();
+        tableService.showTableOnTablePage(tableList, true);
     }
 
     @FXML
-    void allTable(ActionEvent event) {
-
-    }
-
-    @FXML
-    void bookedTable(ActionEvent event) {
-
+    void tableFilter(ActionEvent event) throws IOException {
+        if (event.getSource() == bookedTable) {
+            tableList.getChildren().clear();
+            tableService.showTableOnTablePage(tableList, false);
+        } else if (event.getSource() == allTable) {
+            tableList.getChildren().clear();
+            tableService.showTableOnTablePage(tableList, true);
+        }
     }
 
     @FXML
@@ -188,14 +266,10 @@ public class ApplicationController {
 
     @FXML
     void confirmCreateTableInfo(ActionEvent event) {
-        TableService tableService = new TableServiceImpl();
-
         String tableName = createTableNameField.getText();
         int seats = Integer.parseInt(createTableSeatField.getText());
 
         tableService.createTable(tableName, seats);
-
-        tableService.showTable(tableList);
 
         chooseArea.getItems().clear();
         createTablePopup.setVisible(false);
@@ -214,18 +288,69 @@ public class ApplicationController {
     }
 
     @FXML
-    void goAreaManager(MouseEvent event) {
-        areaManager.setVisible(true);
-        areaManager.setManaged(true);
+    void goFoodManager(MouseEvent event) throws IOException {
+        foodManager.setVisible(true);
+        foodManager.setManaged(true);
+        areaManager.setManaged(false);
+        areaManager.setVisible(false);
 
-        tableService.showTable(tableList);
+        foodCategory.getPanes().clear();
+        foodCategoryService.showCategoryOnFoodManager(foodCategory);
     }
 
-    private void createFoodCategory() {
-        System.out.println("Nhập tên loại đồ ăn: "); String name = scanner.nextLine();
-        System.out.println("Nhập số thứ tự hiển thị (Từ đầu xuống cuối): "); int sortCategory = scanner.nextInt();
-        System.out.println("Nhập trạng thái (bật/tắt"); boolean active = scanner.nextBoolean();
+    @FXML
+    void goAreaManager(MouseEvent event) throws IOException {
+        areaManager.setVisible(true);
+        areaManager.setManaged(true);
+        foodManager.setManaged(false);
+        foodManager.setVisible(false);
 
-        foodCategoryService.createFoodCategory(name, sortCategory, active);
+        tabPaneArea.getTabs().clear();
+        tableService.showTableOnConfigurationPage(tabPaneArea);
+    }
+
+    @FXML
+    void callCreateFoodCategory(ActionEvent event) {
+        createFoodCategoryPopup.setVisible(true);
+        createFoodCategoryPopup.setManaged(true);
+    }
+
+    @FXML
+    void closeCreateFoodCategoryPopup(ActionEvent event) {
+        createFoodCategoryPopup.setVisible(false);
+        createFoodCategoryPopup.setManaged(false);
+
+        createFoodCategoryName.clear();
+        createSortOrderFoodCategory.clear();
+    }
+
+    @FXML
+    void confirmCreateFoodCategory(ActionEvent event) throws IOException {
+        String name = createFoodCategoryName.getText();
+        String sortOrderFoodCategory = createSortOrderFoodCategory.getText();
+
+        foodCategoryService.createFoodCategory(name, Integer.parseInt(sortOrderFoodCategory), true);
+        foodCategory.getPanes().clear();
+        foodCategoryService.showCategoryOnFoodManager(foodCategory);
+        createSortOrderFoodCategory.clear();
+        createFoodCategoryName.clear();
+        createFoodCategoryPopup.setVisible(false);
+        createFoodCategoryPopup.setManaged(false);
+    }
+
+    @FXML
+    void callEditFoodCategory(ActionEvent event) {
+
+    }
+
+    @FXML
+    void callCreateFood(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CreateFoodPopup.fxml"));
+        Parent item = loader.load();
+
+        CreateFoodPopup controller = loader.getController();
+        controller.setParentStackpane(container);
+        container.getChildren().add(item);
+        controller.setCategoryAccordion(foodCategory);
     }
 }

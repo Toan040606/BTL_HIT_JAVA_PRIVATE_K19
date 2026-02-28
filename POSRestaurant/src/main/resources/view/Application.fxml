@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -9,6 +10,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -24,7 +26,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #0d0d0c;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="root.controller.ApplicationController">
+<StackPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #0d0d0c;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="root.controller.ApplicationController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <left>
@@ -167,7 +169,7 @@
          <center>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <BorderPane fx:id="tablePage" mouseTransparent="true" prefHeight="200.0" prefWidth="200.0" visible="false">
+                  <BorderPane fx:id="tablePage" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <left>
                         <AnchorPane prefHeight="431.0" prefWidth="29.0" BorderPane.alignment="CENTER" />
                      </left>
@@ -210,8 +212,8 @@
                                     </Region>
                                     <HBox fillHeight="false" prefHeight="21.0" prefWidth="100.0">
                                        <children>
-                                          <Button fx:id="bookedTableBtn" mnemonicParsing="false" onAction="#bookedTable" text="Đã đặt" />
-                                          <Button fx:id="allTableBtn" mnemonicParsing="false" onAction="#allTable" text="Tất cả" />
+                                          <ToggleButton fx:id="bookedTable" mnemonicParsing="false" onAction="#tableFilter" text="Đã đặt" />
+                                          <ToggleButton fx:id="allTable" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#tableFilter" text="Tất cả" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -264,13 +266,57 @@
                            <left>
                               <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="438.0" prefWidth="214.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
                                  <content>
-                                    <FlowPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #242421;">
+                                    <FlowPane prefHeight="567.0" prefWidth="208.0" style="-fx-background-color: #242421;">
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="46.0" prefWidth="188.0">
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="188.0" spacing="4.0" HBox.hgrow="ALWAYS">
                                                    <children>
                                                       <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Thiết lập quán ăn">
+                                                         <font>
+                                                            <Font name="System Bold" size="16.0" />
+                                                         </font>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Text>
+                                                   </children>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </VBox>
+                                             </children>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </HBox>
+                                          <HBox fx:id="areaManagerBtn" accessibleRole="BUTTON" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#goAreaManager" prefHeight="46.0" prefWidth="188.0">
+                                             <children>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="188.0" spacing="4.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Text accessibleRole="BUTTON" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quản lý khu vực">
+                                                         <font>
+                                                            <Font name="System Bold" size="16.0" />
+                                                         </font>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Text>
+                                                   </children>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </VBox>
+                                             </children>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </HBox>
+                                          <HBox fx:id="foodManagerBtn" accessibleRole="BUTTON" alignment="CENTER_LEFT" fillHeight="false" layoutX="20.0" layoutY="56.0" onMouseClicked="#goFoodManager" prefHeight="46.0" prefWidth="188.0">
+                                             <children>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="188.0" spacing="4.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Text accessibleRole="BUTTON" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quản lý món ăn">
                                                          <font>
                                                             <Font name="System Bold" size="16.0" />
                                                          </font>
@@ -354,28 +400,6 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </HBox>
-                                          <HBox fx:id="areaManagerBtn" accessibleRole="BUTTON" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#goAreaManager" prefHeight="46.0" prefWidth="188.0">
-                                             <children>
-                                                <VBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="188.0" spacing="4.0" HBox.hgrow="ALWAYS">
-                                                   <children>
-                                                      <Text accessibleRole="BUTTON" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quản lý khu vực">
-                                                         <font>
-                                                            <Font name="System Bold" size="16.0" />
-                                                         </font>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                      </Text>
-                                                   </children>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                </VBox>
-                                             </children>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </HBox>
                                           <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="46.0" prefWidth="188.0">
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="188.0" spacing="4.0" HBox.hgrow="ALWAYS">
@@ -398,7 +422,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </HBox>
-                                          <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="46.0" prefWidth="188.0">
+                                          <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="46.0" prefWidth="187.0">
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="188.0" spacing="4.0" HBox.hgrow="ALWAYS">
                                                    <children>
@@ -520,7 +544,7 @@
                               </ScrollPane>
                            </left>
                            <center>
-                              <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                              <StackPane prefHeight="438.0" prefWidth="484.0" BorderPane.alignment="CENTER">
                                  <BorderPane.margin>
                                     <Insets left="10.0" />
                                  </BorderPane.margin>
@@ -570,7 +594,75 @@
                                           </HBox>
                                        </top>
                                        <center>
-                                          <TabPane fx:id="tabPaneArea" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
+                                          <TabPane fx:id="tabPaneArea" prefHeight="390.0" prefWidth="470.0" style="-fx-background-color: #242421;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
+                                       </center>
+                                    </BorderPane>
+                                    <BorderPane fx:id="foodManager" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #242421;" visible="false">
+                                       <top>
+                                          <HBox alignment="CENTER" prefHeight="46.0" prefWidth="471.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quản lý món ăn">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <Region prefHeight="27.0" prefWidth="118.0" HBox.hgrow="ALWAYS" />
+                                                <VBox prefHeight="27.0" prefWidth="222.0">
+                                                   <children>
+                                                      <HBox prefHeight="100.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Button fx:id="createFoodCategoryBtn" mnemonicParsing="false" onAction="#callCreateFoodCategory" prefHeight="27.0" prefWidth="135.0" text="Tạo danh mục">
+                                                               <font>
+                                                                  <Font size="13.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <Button fx:id="deleteFoodCategoryBtn" mnemonicParsing="false" onAction="#callCreateFoodCategory" prefHeight="27.0" prefWidth="135.0" text="Xoá danh mục">
+                                                               <font>
+                                                                  <Font size="13.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Button fx:id="editFoodCategoryBtn" mnemonicParsing="false" onAction="#callEditFoodCategory" prefHeight="27.0" prefWidth="135.0" text="Sửa danh mục">
+                                                               <font>
+                                                                  <Font size="13.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <Button fx:id="createFoodBtn" mnemonicParsing="false" onAction="#callCreateFood" prefHeight="27.0" prefWidth="135.0" text="Tạo món ăn">
+                                                               <font>
+                                                                  <Font size="13.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                       </top>
+                                       <center>
+                                          <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                             <content>
+                                                <Accordion fx:id="foodCategory" />
+                                             </content>
+                                          </ScrollPane>
                                        </center>
                                     </BorderPane>
                                  </children>
@@ -708,6 +800,70 @@
                            </children>
                         </HBox>
                         <Button fx:id="confirmCreateAreaBtn" mnemonicParsing="false" onAction="#confirmCreateArea" prefHeight="30.0" prefWidth="409.0" style="-fx-background-color: #ff670f;" text="Xác nhận" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+      <BorderPane fx:id="createFoodCategoryPopup" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+         <center>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="125.0" prefWidth="428.0" style="-fx-background-color: #242421; -fx-background-radius: 10; -fx-border-color: #404040; -fx-border-width: 2; -fx-border-radius: 10;" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="25.0" prefWidth="428.0" style="-fx-border-radius: 10;">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tạo danh mục đồ ăn">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="closeCreateFoodCategoryBtn" mnemonicParsing="false" onAction="#closeCreateFoodCategoryPopup" style="-fx-background-color: #242421;" text="X" textFill="#aeaeae">
+                           <font>
+                              <Font name="Arial Black" size="12.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <VBox fillWidth="false" prefHeight="47.0" prefWidth="424.0" spacing="15.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="399.0">
+                           <children>
+                              <Label prefHeight="22.0" prefWidth="41.0" text="Tên: " textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="createFoodCategoryName" onAction="#confirmCreateFoodCategory" prefHeight="30.0" prefWidth="178.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Label prefHeight="22.0" prefWidth="124.0" text="Thứ tự sắp xếp: " textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="createSortOrderFoodCategory" onAction="#confirmCreateFoodCategory" prefHeight="26.0" prefWidth="37.0" />
+                           </children>
+                        </HBox>
+                        <Button fx:id="confirmCreateFoodCategoryBtn" mnemonicParsing="false" onAction="#confirmCreateFoodCategory" prefHeight="30.0" prefWidth="409.0" style="-fx-background-color: #ff670f;" text="Xác nhận" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

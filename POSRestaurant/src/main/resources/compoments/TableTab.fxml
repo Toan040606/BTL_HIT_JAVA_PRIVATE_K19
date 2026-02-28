@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.FlowPane?>
+
+<Tab fx:id="tabId" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="root.controller.components.TableTabController">
+   <content>
+      <ScrollPane fx:id="scrollTable" fitToHeight="true" fitToWidth="true" style="-fx-background-color: #242421;">
+         <content>
+            <FlowPane fx:id="showHorizonTable" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </FlowPane>
+         </content>
+      </ScrollPane>
+   </content>
+</Tab>

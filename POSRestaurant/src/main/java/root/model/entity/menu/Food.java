@@ -34,13 +34,9 @@ public class Food {
 
     private boolean active;
 
-    private boolean haveFoodAddons;
-
-    private boolean haveOptionRequired;
-
-    @OneToMany(mappedBy = "food", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "foods")
     private List<FoodAddon> foodAddons = new ArrayList<>();
 
-    @OneToMany(mappedBy = "food", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "foods")
     private List<OptionRequiredGroup> optionRequiredGroups = new ArrayList<>();
 }

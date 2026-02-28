@@ -20,6 +20,7 @@ public class FoodAddonDaoImpl implements FoodAddonDao {
             return true;
         } catch (Exception e) {
             if (transaction != null) {transaction.rollback();}
+            e.printStackTrace();
             return false;
         }
     }
