@@ -1,5 +1,6 @@
 package root.dao;
 
+import root.model.entity.OtpCode;
 import root.model.entity.core.User;
 
 public interface UserDao {
@@ -8,4 +9,6 @@ public interface UserDao {
     boolean exists(User user);
     boolean isEmailExists(String email);
     boolean resetPass(String email, String newPass);
+    void saveOtp(OtpCode otpCode);
+    OtpCode findValidOtp(String email, String otp);
 }

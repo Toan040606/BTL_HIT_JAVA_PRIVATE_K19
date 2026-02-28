@@ -10,6 +10,7 @@
         <mapping class="root.model.entity.core.User"/>
         <mapping class="root.model.entity.core.Area"/>
         <mapping class="root.model.entity.menu.Food"/>
+        <mapping class="root.model.entity.OtpCode"/>
         <mapping class="root.model.entity.core.Order"/>
         <mapping class="root.model.entity.core.Customer"/>
         <mapping class="root.model.entity.menu.FoodAddon"/>

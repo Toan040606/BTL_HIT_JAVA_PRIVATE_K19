@@ -3,7 +3,7 @@ package root.constant;
 public class QuerryMessage {
     public static final String USER_LOGIN  = "FROM User WHERE username = :un";
     public static final String USER_ISEXISTS  = "SELECT count(u) FROM User u WHERE u.username = :un OR u.email = :email";
-    public static final String USER_CHECK_EMAIL  = "SELECT 1 FROM User WHERE email = :email";
+    public static final String USER_CHECK_EMAIL  = "SELECT count(u) FROM User u WHERE u.email = :email";
     public static final String USER_PASSWORD_UPDATE  = "UPDATE User u SET u.password = :pw WHERE u.email = :email";
     public static final String GET_ALL_TABLE = "FROM TableEntity";
     public static final String GET_ALL_AREA = "FROM Area a ORDER BY a.name ASC";
@@ -15,4 +15,7 @@ public class QuerryMessage {
     public static final String GET_ALL_ORG = "SELECT DISTINCT o FROM OptionRequiredGroup o LEFT JOIN FETCH o.foods f " +
             "LEFT JOIN FETCH f.category c " +
             "LEFT JOIN FETCH c.user u ";
+    public static final String OTP_VALID  = "FROM OtpCode o WHERE o.email = :email AND o.otp = :otp AND o.expiredAt > :now";
+    public static final String DELETE_OTP_BY_EMAIL  = "DELETE FROM OtpCode o WHERE o.email = :email";
+    public static final String DELETE_EXPIRED_OTP  = "DELETE FROM OtpCode o WHERE o.expiredAt < :now";
 }

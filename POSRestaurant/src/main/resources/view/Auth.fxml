@@ -128,9 +128,35 @@
                         <Font size="13.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="30.0" />
+                        <Insets />
                      </VBox.margin>
                   </TextField>
+                  <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="260.0">
+                     <children>
+                        <Label fx:id="findEmailLabel1" prefHeight="19.0" prefWidth="50.0" text="Otp:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtOtp" onAction="#handleFindEmailToGoResetPass" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: #3d3d3d; -fx-border-color: #666666; -fx-text-fill: white;">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button fx:id="findEmailButton" mnemonicParsing="false" onAction="#handleSendOtp" prefHeight="26.0" prefWidth="74.0" text="Gửi mã">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="verifyButton1" layoutX="214.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleVerifyOtp" prefHeight="26.0" prefWidth="67.0" text="Verify" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </HBox>
                   <Button fx:id="findEmail_btn" mnemonicParsing="false" onAction="#handleFindEmailToGoResetPass" prefHeight="31.0" prefWidth="362.0" style="-fx-background-color: #ff670f;" text="Tạo lại mật khẩu" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />

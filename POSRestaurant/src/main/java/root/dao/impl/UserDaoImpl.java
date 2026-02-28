@@ -3,12 +3,16 @@ package root.dao.impl;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import root.constant.ErrorMessage;
 import root.constant.QuerryMessage;
 import root.dao.UserDao;
+import root.model.entity.OtpCode;
 import root.model.entity.core.User;
 import root.util.ConnectDB;
 import root.util.UserSession;
 import root.util.PasswordUtil;
+
+import java.time.LocalDateTime;
 
 public class UserDaoImpl implements UserDao {
     ConnectDB connectDB = new ConnectDB();
@@ -100,4 +104,58 @@ public class UserDaoImpl implements UserDao {
         return false;
     }
 
+    public void saveOtp(OtpCode otpCode){
+        Transaction transaction = null;
+        try (Session session = connectDB.open()){
+            transaction = session.beginTransaction();
+            LocalDateTime now = LocalDateTime.now();
+            //Xóa otp hêt hạn
+            session.createQuery(QuerryMessage.DELETE_EXPIRED_OTP)
+                    .setParameter("now",now)
+                    .executeUpdate();
+
+            // Xóa email cũ của email này
+            session.createQuery(QuerryMessage.DELETE_OTP_BY_EMAIL)
+                    .setParameter("email", otpCode.getEmail())
+                    .executeUpdate();
+
+
+            session.persist(otpCode);
+            transaction.commit();
+
+        } catch (Exception e){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public OtpCode findValidOtp(String email,String otp){
+        Transaction transaction = null;
+        try (Session session = connectDB.open()){
+            transaction = session.beginTransaction();
+            LocalDateTime now = LocalDateTime.now();
+
+            OtpCode otpCode = session.createQuery(QuerryMessage.OTP_VALID, OtpCode.class)
+                    .setParameter("email",email)
+                    .setParameter("otp",otp)
+                    .setParameter("now",now)
+                    .uniqueResult();
+
+            if(otpCode != null){
+                session.remove(otpCode);
+            }
+
+            transaction.commit();
+            return otpCode;
+        } catch (Exception e){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

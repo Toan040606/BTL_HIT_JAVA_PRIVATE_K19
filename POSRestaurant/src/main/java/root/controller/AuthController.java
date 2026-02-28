@@ -18,6 +18,7 @@ import java.io.IOException;
 public class AuthController {
     private final UserAuth userAuth = new UserAuthImpl();
     public String email;
+    boolean check = false;
 
     @FXML
     private Label emailRegisterLabel;
@@ -131,6 +132,15 @@ public class AuthController {
     private Label usernameRegisterLabel;
 
     @FXML
+    private TextField txtOtp;
+
+    @FXML
+    private Button verifyButton;
+
+    @FXML
+    private Button findEmailButton;
+
+    @FXML
     void initialize() {
         loginForm.setVisible(true);
         registerForm.setVisible(false);
@@ -161,7 +171,12 @@ public class AuthController {
     @FXML
     void handleFindEmailToGoResetPass(ActionEvent event) {
         email = txtFindEmail.getText();
-        userAuth.findEmail(email, lblMsgFindEmail, loginForm, registerForm, findEmailForm, rsPasswordForm);
+        if (check) {
+            loginForm.setVisible(false);
+            registerForm.setVisible(false);
+            findEmailForm.setVisible(false);
+            rsPasswordForm.setVisible(true);
+        }
     }
 
     @FXML
@@ -189,5 +204,22 @@ public class AuthController {
         String confirm = txtConfirmNewPass.getText();
 
         userAuth.resetPassword(email, newPass, confirm, lblMsgNewPass);
+    }
+
+    @FXML
+    void handleVerifyOtp(ActionEvent event) {
+        String otp = txtOtp.getText();
+        String email = txtFindEmail.getText();
+
+        if (userAuth.verifyOtp(email, otp, lblMsgFindEmail)) {
+            check = true;
+        }
+    }
+
+    @FXML
+    void handleSendOtp(ActionEvent event) {
+        String email = txtFindEmail.getText();
+
+        userAuth.findEmail(email, lblMsgFindEmail, findEmailButton);
     }
 }

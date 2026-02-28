@@ -3,6 +3,7 @@ package root.service.impl;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -11,12 +12,16 @@ import root.constant.ErrorMessage;
 import root.constant.SuccessMessage;
 import root.dao.UserDao;
 import root.dao.impl.UserDaoImpl;
+import root.model.entity.OtpCode;
 import root.model.entity.core.User;
 import root.service.UserAuth;
+import root.util.EmailUtil;
+import root.util.OtpUtil;
 import root.util.PasswordUtil;
 import root.util.UserSession;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class UserAuthImpl implements UserAuth {
@@ -88,7 +93,7 @@ public class UserAuthImpl implements UserAuth {
     }
 
     @Override
-    public void findEmail(String email, Label lblMsg, BorderPane login, BorderPane register, BorderPane findEmail, BorderPane rsPass){
+    public void findEmail(String email, Label lblMsg, Button button){
         if (email.isEmpty()) {
             lblMsg.setText(ErrorMessage.EMPTY_ERROR);
             lblMsg.setStyle("-fx-text-fill: red;");// đỏ
@@ -96,10 +101,8 @@ public class UserAuthImpl implements UserAuth {
         }
 
         if (userDao.isEmailExists(email)) {
-            login.setVisible(false);
-            register.setVisible(false);
-            findEmail.setVisible(false);
-            rsPass.setVisible(true);
+            sendOtpToEmail(email, lblMsg);
+            button.setText("Gửi lại");
         } else {
             lblMsg.setText(ErrorMessage.INVALID_EMAIL_ERROR);
             lblMsg.setStyle("-fx-text-fill: red;"); // đỏ
@@ -137,5 +140,80 @@ public class UserAuthImpl implements UserAuth {
         Stage stage = (Stage) logoutBtn.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/view/Auth.fxml"));
         stage.setScene(new Scene(root));
+    }
+
+    @Override
+    public boolean verifyOtp(String email, String otp, Label lblMsg) {
+        try {
+            if (otp == null || otp.isEmpty()) {
+                System.out.println(ErrorMessage.EMPTY_ERROR);
+            }
+
+            OtpCode otpCode = userDao.findValidOtp(email, otp);
+
+            if (otpCode == null) {
+                System.out.println(ErrorMessage.VALID_OTP_ERROR);
+            }
+
+            assert otpCode != null;
+            if (!(Objects.equals(otp, otpCode.getOtp()))) {
+                return false;
+            }
+
+            lblMsg.setText(SuccessMessage.OTP_VERIFY_SUCCESS);
+            lblMsg.setStyle("-fx-text-fill: #00ff99;");
+
+            return true;
+        } catch (Exception e) {
+            lblMsg.setText(ErrorMessage.SYSTEM_ERROR);
+            lblMsg.setStyle("-fx-text-fill: orange;");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void processOtp(String email,Label lblMsg,String successMsg) {
+        if(email.isEmpty()){
+            System.out.println(ErrorMessage.EMPTY_ERROR);
+        }
+
+        if(!userDao.isEmailExists(email)){
+            System.out.println(ErrorMessage.INVALID_EMAIL_ERROR);
+        }
+
+        String otp = OtpUtil.otpCode();
+
+        OtpCode otpCode = OtpCode.builder()
+                .email(email)
+                .otp(otp)
+                .expiredAt(OtpUtil.expiredAfterMinutes(5))
+                .build();
+        EmailUtil.sendOtp(email,otp);
+        userDao.saveOtp(otpCode);
+
+        lblMsg.setText(successMsg);
+        lblMsg.setStyle("-fx-text-fill: #00ff99;");
+    }
+
+    @Override
+    public void sendOtpToEmail(String email, Label lblMsg) {
+        try{
+            processOtp(email,lblMsg,SuccessMessage.SEND_OTP_SUCCESS);
+        }catch (Exception e){
+            lblMsg.setText(ErrorMessage.SYSTEM_ERROR);
+            lblMsg.setStyle("-fx-text-fill: orange;");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void resendOtpToEmail(String email,Label lblMsg) {
+        try{
+            processOtp(email,lblMsg,SuccessMessage.RESEND_OTP_SUCCESS);
+        }catch (Exception e){
+            lblMsg.setText(ErrorMessage.SYSTEM_ERROR);
+            lblMsg.setStyle("-fx-text-fill: orange;");
+            e.printStackTrace();
+        }
     }
 }
